@@ -1,17 +1,29 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection, isDevMode } from '@angular/core';
+import { swRegistrationOptions } from '@/core/service-worker';
+import { provideContextService } from '@/services/context';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  ApplicationConfig,
+  provideBrowserGlobalErrorListeners,
+  provideZonelessChangeDetection,
+} from '@angular/core';
+import {
+  provideClientHydration,
+  withEventReplay,
+  withHttpTransferCacheOptions,
+} from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import { provideServiceWorker } from '@angular/service-worker';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideServiceWorker } from '@angular/service-worker';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay()), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          })
-  ]
+    provideRouter(routes),
+    provideClientHydration(withHttpTransferCacheOptions({}), withEventReplay()),
+    provideServiceWorker('ngsw-worker.js', swRegistrationOptions),
+    provideHttpClient(withFetch()),
+    provideContextService(),
+  ],
 };
