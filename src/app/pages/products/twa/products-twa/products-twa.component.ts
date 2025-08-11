@@ -41,9 +41,9 @@ export default class ProductsTwaComponent {
   private readonly productService = inject(ProductService);
 
   readonly results$ = this.searchControl.valueChanges.pipe(
+    debounceTime(300),
     filter(Boolean),
     startWith(''),
-    debounceTime(600),
     switchMap((search) =>
       this.productService
         .getProducts({

@@ -6,7 +6,7 @@ import {
 } from '@/core/guards';
 import { productResolver } from './core/resolvers/product.resolver';
 
-export const TWA_ROUTES: Routes = [
+const TWA_ROUTES: Routes = [
   {
     path: '',
     // canMatch: [canMatchDeviceTWA],
@@ -41,21 +41,24 @@ export const TWA_ROUTES: Routes = [
   },
 ];
 
-export const routes: Routes = [
-  // {
-  //   path: '',
-  //   canMatch: [canMatchDeviceDesktop],
-  //   loadComponent: () =>
-  //     import('@/layout/content/desktop/content-desktop.component'),
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadComponent: () =>
-  //         import('./pages/products/web/products-web/products-web.component'),
-  //     },
-  //   ],
-  // },
+const WEB_ROUTES: Routes = [
+  {
+    path: '',
+    canMatch: [canMatchDeviceDesktop],
+    loadComponent: () =>
+      import('@/layout/content/desktop/content-desktop.component'),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./pages/products/web/products-web/products-web.component'),
+      },
+    ],
+  },
+];
 
+export const routes: Routes = [
+  ...WEB_ROUTES,
   ...TWA_ROUTES,
   // {
   //   path: '',

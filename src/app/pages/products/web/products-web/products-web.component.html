@@ -1,1 +1,185 @@
-<p>products-web works!</p>
+<!-- Kike Sport Tienda - Página de Productos -->
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+  <!-- Hero Section -->
+  <section class="relative py-16 px-4 text-center overflow-hidden">
+    <!-- Decorative Elements -->
+    <div
+      class="absolute top-8 left-8 w-16 h-16 bg-red-500 rounded-full opacity-20"
+    ></div>
+    <div
+      class="absolute top-16 right-16 w-20 h-20 bg-blue-500 rounded-full opacity-15"
+    ></div>
+    <div
+      class="absolute bottom-8 left-1/4 w-12 h-12 bg-cyan-400 rounded-full opacity-25"
+    ></div>
+    <div
+      class="absolute bottom-16 right-8 w-24 h-24 bg-red-400 rounded-full opacity-20"
+    ></div>
+
+    <!-- Paper Planes -->
+    <div class="absolute top-12 left-16">
+      <svg
+        class="w-16 h-16 text-blue-400 opacity-60"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+      </svg>
+    </div>
+    <div class="absolute top-8 right-24">
+      <svg
+        class="w-20 h-20 text-red-400 opacity-60 transform rotate-45"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+      </svg>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <div
+        class="text-sm text-blue-600 font-medium mb-2 tracking-wide uppercase"
+      >
+        Home
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Shop
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        Awesome Products
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 pb-16">
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar Filters -->
+      <aside class="lg:w-64 shrink-0">
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+        >
+          <!-- Categories Header -->
+          <div class="bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4">
+            <h3 class="text-white font-semibold">Productos Categorías</h3>
+          </div>
+
+          <!-- Categories List -->
+          <div class="p-6 space-y-4">
+            <!-- Polos Section -->
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Polos</h4>
+              <div class="space-y-2 ml-4">
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polos Manga Larga
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polos Manga Corta
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polos Listado
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polo Camisero
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polo Redondo
+                </button>
+              </div>
+            </div>
+
+            <!-- Franela Section -->
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Franela</h4>
+              <div class="space-y-2 ml-4">
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Pantalón
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Polera
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Capucha
+                </button>
+                <button
+                  class="block text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                >
+                  Conjuntos
+                </button>
+              </div>
+            </div>
+
+            <!-- Bividi Section -->
+            <div>
+              <h4 class="font-semibold text-gray-900 mb-3">Bividi</h4>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Section -->
+      <main class="flex-1">
+        <!-- Filters Bar -->
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8"
+        >
+          <div class="flex flex-col md:flex-row gap-6">
+            <!-- Price Range -->
+            <div class="flex-1">
+              <label class="block text-sm font-medium text-gray-700 mb-3">
+                Rango de Precio: S/1 - S/100
+              </label>
+            </div>
+
+            <!-- Sort By -->
+            <div class="w-full md:w-64">
+              <label class="block text-sm font-medium text-gray-700 mb-3">
+                ORDENAR POR:
+              </label>
+            </div>
+
+            <!-- Sizes -->
+            <div class="w-full md:w-64">
+              <label class="block text-sm font-medium text-gray-700 mb-3">
+                TALLAS:
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+        >
+          @for (item of products(); track $index) {
+          <app-product-web [product]="item" />
+          }
+        </div>
+
+        <!-- Load More / Pagination -->
+        <div class="flex justify-center mt-12">
+          <button tuiButton appearance="secondary" size="l" class="px-8">
+            <tui-icon icon="@tui.reload" class="mr-2"></tui-icon>
+            Load more products
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
