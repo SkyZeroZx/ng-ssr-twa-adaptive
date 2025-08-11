@@ -1,1 +1,57 @@
-<p>products-twa works!</p>
+<div class="min-h-screen">
+  <div class="flex justify-center">
+    <div class="flex pt-2 pb-2 items-center gap-3" style="width: 96dvw">
+      <tui-textfield (pointerdown.capture.stop)="(0)" [tuiTextfieldCleaner]="false">
+        <input
+          #searchInput
+          style="width: 96dvw"
+          tuiSearchHotkey
+          [formControl]="searchControl"
+          [tuiInputSearch]="search"
+          (tuiInputSearchOpenChange)="onShow($any($event))"
+          placeholder="Search products"
+        />
+        <ng-template #search>
+          <tui-search-results [results]="results$ | async">
+            <tui-search-history [popular]="popular" />
+            <ng-template let-item>
+              <a
+                tuiCell
+                [routerLink]="['/product', item.id]"
+                (click)="searchInput.close()"
+              >
+                <span tuiTitle>
+                  {{ item.name }}
+                  <span tuiSubtitle>{{ item.price | currency }}</span>
+                </span>
+              </a>
+            </ng-template>
+          </tui-search-results>
+        </ng-template>
+      </tui-textfield>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4 pt-4 pr-2 pl-2">
+    @for (item of results()['products']; track item.id) {
+    <app-product-twa
+      [style.view-transition-name]="`product-image-${item.id}`"
+      [product]="item"
+      class="w-full"
+    />
+    } @empty {
+    <ng-content *ngTemplateOutlet="loading" />
+    }
+  </div>
+</div>
+
+<ng-template #loading>
+  @for (_ of [].constructor(6); track $index) {
+  <ngx-skeleton-loader
+    appearance="square"
+    [theme]="{
+      width: '190px',
+      height: '422px'
+    }"
+  />}
+</ng-template>

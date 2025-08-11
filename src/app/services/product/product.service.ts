@@ -1,4 +1,5 @@
 import { map, Observable } from 'rxjs';
+import { Cacheable } from 'ts-cacheable';
 
 import { PAGINATION_DEFAULT } from '@/core/constants/pagination';
 import {
@@ -20,6 +21,7 @@ import { environment } from '../../../environments/environment';
 export class ProductService {
   private readonly http = inject(HttpClient);
 
+  @Cacheable()
   getProducts(
     paginationOptions: PaginationOptions = PAGINATION_DEFAULT
   ): Observable<PaginationResult<ProductCard>> {
@@ -41,6 +43,7 @@ export class ProductService {
       );
   }
 
+  @Cacheable()
   findById(id: number | string): Observable<ProductCard> {
     return this.http
       .get<Product>(`${environment.API}/products/${id}`)
