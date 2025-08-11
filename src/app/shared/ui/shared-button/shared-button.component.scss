@@ -1,0 +1,32 @@
+.shared-button-wrapper {
+	border-radius: 50%;
+	padding: 6px;
+	color: #5b5b5b;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&--base {
+		width: 45px;
+		height: 45px;
+	}
+
+	&--small {
+		width: 44px;
+		height: 44px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+		svg {
+			height: 28px;
+			width: 28px;
+		}
+	}
+
+	&--gray {
+		background-color: #f6f6f6;
+	}
+
+	&--white {
+		background-color: #ffffff;
+	}
+}

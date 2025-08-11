@@ -1,0 +1,129 @@
+// =========================
+// Carousel
+// =========================
+
+:host {
+  flex: 1;
+}
+
+.carousel {
+  height: auto;
+  position: relative;
+
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.5em;
+  min-height: 40dvh;
+}
+
+.slide {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  // zoom effect on hover
+  transition: transform 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+  border-radius: 0.5em;
+}
+
+.slide:hover {
+  transform: scale(1.025);
+}
+
+// =========================
+// Next and Prev buttons
+// =========================
+.control {
+  border: none;
+  background-color: transparent;
+  outline: 0; // remove blue outline border, but make sure they are still focussable for accessibility
+  position: absolute;
+  cursor: pointer;
+  display: none;
+
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5em;
+  font-weight: bold;
+  font-size: 3em;
+  user-select: none;
+  height: 100%;
+  opacity: 80%;
+  // opacity effect on hover
+  transition: opacity 150ms cubic-bezier(0.25, 0.46, 0.45, 0.84);
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+
+  /* Position the buttons */
+  &.next {
+    right: 0;
+  }
+  &.prev {
+    left: 0;
+  }
+}
+
+/* style the arrows */
+@media (min-width: 768px) {
+  .control {
+    display: flex;
+  }
+  .arrow {
+    display: block;
+    border-left: 0.1em solid black;
+    border-bottom: 0.1em solid black;
+    width: 0.5em;
+    height: 0.5em;
+
+    &.left {
+      transform: rotate(45deg);
+    }
+    &.right {
+      transform: rotate(225deg);
+    }
+  }
+}
+
+.preview-carousel-container {
+  min-height: 85px;
+  min-width: 77px;
+
+  .list-carousel-preview {
+    list-style: none;
+    text-align: center;
+    position: static;
+    overflow: hidden;
+  }
+
+  .item-carousel-preview {
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    width: auto !important;
+    float: none;
+    display: inline-block;
+    z-index: 1;
+  }
+
+  .preview-img {
+    cursor: pointer;
+    opacity: 0.7;
+    background-color: #ffffff;
+    border-radius: 0px;
+    border-bottom: 3px solid transparent;
+    display: block;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    &.active {
+      border-color: #81d1e5 !important;
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,375 @@
+// VARIABLES
+// colours
+$blue: #0090e3;
+$silver: #949191;
+// fireworks
+$fireworks--width: 3px;
+$fireworks--height: 3px;
+$fireworks--border: calc($fireworks--width / 2);
+
+*,
+:before,
+:after {
+	box-sizing: border-box;
+}
+
+.heart-wrapper > svg {
+	width: 25px;
+	height: 1.75rem;
+}
+
+@media (max-width: 600px) {
+	.heart-wrapper > svg {
+		width: 30px;
+		height: 2rem;
+	}
+}
+
+// button styles
+.button--secondary,
+.button--secondary:visited {
+	border-radius: 3px;
+	cursor: pointer;
+	display: inline-block;
+	min-width: 64px;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: 15px;
+	outline: none;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: none;
+	transition: background 0.1s linear;
+	font-weight: 400;
+	color: $blue;
+	background: #fff;
+	border: 1px solid #ddd;
+	box-shadow: none;
+	padding: 15px 15px;
+	transition-property: border;
+	transition-timing-function: ease-in-out;
+	transition-duration: 0.15s;
+}
+
+.button--full-width {
+	min-width: 385px;
+}
+
+.icon-with-text {
+	display: inline-flex;
+	align-items: flex-start;
+}
+
+.icon-with-text__icon {
+	flex-shrink: 0;
+	margin-right: 8px;
+	margin-top: -2px;
+}
+
+.icon-svg--color-silver {
+	fill: $silver;
+	color: $silver;
+}
+
+.icon-svg--color-blue {
+	fill: $blue;
+	color: $blue;
+}
+
+.icon-svg {
+	//  display: inline-block;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+}
+
+// position the active state heart
+.heart-full {
+	position: absolute;
+	//left: 0px;
+	top: 0px;
+	opacity: 0;
+}
+
+// firework effect styles
+.btn__effect {
+	display: inline-block;
+	position: relative;
+	position: absolute;
+	left: 8px;
+	top: 7px;
+	right: 0px;
+	width: 100%;
+	@media (max-width: 600px) {
+		left: 9px;
+		top: 9px;
+	}
+}
+
+.effect-group {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: rotate(25deg);
+	.effect {
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 30%;
+		// top: 38%;
+		// left: 50%;
+		width: 20px;
+		transform-origin: 0px 2px;
+		&:nth-child(2) {
+			transform: rotate(72deg);
+		}
+		&:nth-child(3) {
+			transform: rotate(72 * 2deg);
+		}
+		&:nth-child(4) {
+			transform: rotate(72 * 3deg);
+		}
+		&:nth-child(5) {
+			transform: rotate(72 * 4deg);
+		}
+		&:before {
+			content: '';
+			display: block;
+			position: absolute;
+			right: 0;
+			border-radius: $fireworks--border;
+			height: $fireworks--height;
+			background: #0090e3;
+		}
+		&:after {
+			content: '';
+			display: block;
+			position: absolute;
+			top: 10px;
+			right: 10%;
+			border-radius: 50%;
+			width: $fireworks--width;
+			height: $fireworks--height;
+			background: #ff6600;
+			transform: scale(0, 0);
+		}
+	}
+}
+
+// TRIGGER ANIMATIONS
+// Generic
+.active {
+	.heart-stroke {
+		opacity: 0;
+	}
+	.heart-full {
+		opacity: 1;
+	}
+	.icon-svg {
+		animation: bounceIn 0.5s linear;
+	}
+	.effect:before {
+		animation: fireworkLine 0.5s linear 0.1s;
+	}
+	.effect:after {
+		animation: fireworkPoint 0.5s linear 0.1s;
+	}
+}
+
+//cracking heart
+.broken-heart {
+	position: absolute;
+	left: -21px;
+	top: -18px;
+	opacity: 0;
+	height: 66px !important;
+	width: 66px !important;
+	&--left {
+		transform: rotate(0deg);
+		transform-origin: 60% 200%;
+	}
+	&--right {
+		transform: rotate(0deg);
+		transform-origin: 63% 200%;
+	}
+	&--crack {
+		stroke-dasharray: 15;
+		stroke-dashoffset: 15;
+	}
+	@media (max-width: 600px) {
+		left: -26px;
+		top: -24px;
+		opacity: 0;
+		height: 80px !important;
+		width: 80px !important;
+	}
+}
+
+.deactivate {
+	.broken-heart {
+		opacity: 1;
+	}
+	.broken-heart--left {
+		animation:
+			crackLeft 0.35s cubic-bezier(0.68, -0.55, 0.265, 2.85) 0.15s forwards,
+			hide 0.25s ease-in 0.55s forwards;
+	}
+	.broken-heart--right {
+		animation:
+			crackRight 0.35s cubic-bezier(0.68, -0.55, 0.265, 2.85) 0.15s forwards,
+			hide 0.25s ease-in 0.55s forwards;
+	}
+	.broken-heart--crack {
+		animation: crack 0.2s ease-in forwards;
+	}
+}
+
+// Variation One
+.button.one.desktop:not(.active):hover {
+	.heart-stroke {
+		animation: pulse 1s ease-out infinite;
+	}
+}
+
+// Variation Two
+.button.two.desktop:not(.active):hover {
+	.heart-stroke {
+		animation: pulseBlue 1s ease-out infinite;
+	}
+}
+
+// ANIMATIONS
+
+// subtle heart pulse on hover (grey)
+@keyframes pulse {
+	0% {
+		opacity: 1;
+		transform-origin: center center;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.6;
+		transform: scale(1.15);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+// subtle heart pulse on hover (grey to blue)
+@keyframes pulseBlue {
+	0% {
+		transform-origin: center center;
+		transform: scale(1);
+		fill: $silver;
+	}
+	50% {
+		transform: scale(1.15);
+		fill: $blue;
+	}
+	100% {
+		transform: scale(1);
+		fill: $silver;
+	}
+}
+
+// fireworks animations
+@keyframes fireworkLine {
+	0% {
+		right: 20%;
+		transform: scale(0, 0);
+	}
+	25% {
+		right: 20%;
+		width: 6px;
+		transform: scale(1, 1);
+	}
+	35% {
+		right: 0;
+		width: 35%;
+	}
+	70% {
+		right: 0;
+		width: 4px;
+		transform: scale(1, 1);
+	}
+	100% {
+		right: 0;
+		transform: scale(0, 0);
+	}
+}
+@keyframes fireworkPoint {
+	30% {
+		transform: scale(0, 0);
+	}
+	60% {
+		transform: scale(1, 1);
+	}
+	100% {
+		transform: scale(0, 0);
+	}
+}
+
+@keyframes bounceIn {
+	0% {
+		transform: scale(0);
+	}
+	30% {
+		transform: scale(1.25);
+	}
+	50% {
+		transform: scale(0.9);
+	}
+	70% {
+		transform: scale(1.1);
+	}
+	80% {
+		transform: scale(1);
+	}
+}
+
+// WIP deactivate state
+@keyframes crackLeft {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-45deg);
+	}
+}
+
+@keyframes crackRight {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(45deg);
+	}
+}
+
+@keyframes crack {
+	0% {
+		stroke-dasharray: 15;
+		stroke-dashoffset: 15;
+	}
+	80% {
+		stroke-dasharray: 15;
+		stroke-dashoffset: 0;
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

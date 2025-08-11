@@ -1,0 +1,56 @@
+<div class="carousel">
+	<div
+		[@slideToggle]="{
+			value: currentSlide(),
+			params: {
+				leaveEnd: animationDirection() === 'right' ? '100%' : '-100%',
+				enterStart: !isFirst ? enterStart() : '0%'
+			}
+		}"
+	>
+		@for (slide of slides(); track i; let i = $index) {
+			@if (i === currentSlide()) {
+				<img
+					appSwipe
+					(swipeLeft)="onPreviousClick()"
+					(swipeRight)="onNextClick()"
+					priority
+					[ngSrc]="slide.src"
+					class="slide"
+					alt="Product Image"
+					[height]="slide.height"
+					[width]="slide.width"
+ 				/>
+			}
+		}
+	</div>
+
+	@if (!hasLengthOne()) {
+		<button aria-label="next" class="control prev" (click)="onPreviousClick()">
+			<span class="arrow left" aria-hidden="true"></span>
+		</button>
+		<button aria-label="previous" class="control next" (click)="onNextClick()">
+			<span class="arrow right" aria-hidden="true"></span>
+		</button>
+	}
+</div>
+
+<div class="preview-carousel-container">
+	<ol class="list-carousel-preview">
+		@for (slide of previewImages(); track i; let i = $index) {
+			<li class="item-carousel-preview">
+				<img
+					class="preview-img"
+					priority
+					[class.active]="currentSlide() === i"
+					[height]="85"
+					[width]="77"
+					alt="Product preview"
+					[ngSrc]="slide.src"
+					(click)="changeImage(i)"
+					[title]="'Product preview'"
+				/>
+			</li>
+		}
+	</ol>
+</div>
