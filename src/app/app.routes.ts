@@ -4,21 +4,9 @@ import {
   canMatchDeviceMobile,
   canMatchDeviceTWA,
 } from '@/core/guards';
+import { productResolver } from './core/resolvers/product.resolver';
 
-export const routes: Routes = [
-  // {
-  //   path: '',
-  //   canMatch: [canMatchDeviceDesktop],
-  //   loadComponent: () =>
-  //     import('@/layout/content/desktop/content-desktop.component'),
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadComponent: () =>
-  //         import('./pages/products/web/products-web/products-web.component'),
-  //     },
-  //   ],
-  // },
+export const TWA_ROUTES: Routes = [
   {
     path: '',
     // canMatch: [canMatchDeviceTWA],
@@ -36,9 +24,39 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/products/twa/products-twa/products-twa.component'),
       },
+      {
+        path: 'product/:id',
+        data: {
+          fullScreen: true,
+        },
+        resolve: {
+          product: productResolver,
+        },
+        loadComponent: () =>
+          import(
+            '@/pages/product-detail/twa/product-detail-twa/product-detail-twa.component'
+          ),
+      },
     ],
   },
+];
 
+export const routes: Routes = [
+  // {
+  //   path: '',
+  //   canMatch: [canMatchDeviceDesktop],
+  //   loadComponent: () =>
+  //     import('@/layout/content/desktop/content-desktop.component'),
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadComponent: () =>
+  //         import('./pages/products/web/products-web/products-web.component'),
+  //     },
+  //   ],
+  // },
+
+  ...TWA_ROUTES,
   // {
   //   path: '',
   //   canMatch: [canMatchDeviceMobile],

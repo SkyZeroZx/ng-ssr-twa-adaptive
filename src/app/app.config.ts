@@ -1,6 +1,6 @@
 import { provideEventPlugins } from '@taiga-ui/event-plugins';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { swRegistrationOptions } from '@/core/service-worker';
+import { swRegistrationOptions } from '@/core/config/service-worker';
 import { provideContextService } from '@/services/context';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
@@ -13,7 +13,11 @@ import {
   withEventReplay,
   withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withViewTransitions,
+} from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 
 import { routes } from './app.routes';
@@ -23,7 +27,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withViewTransitions({
+        skipInitialTransition: true,
+      })
+    ),
     provideClientHydration(withHttpTransferCacheOptions({}), withEventReplay()),
     provideServiceWorker('ngsw-worker.js', swRegistrationOptions),
     provideHttpClient(withFetch()),
