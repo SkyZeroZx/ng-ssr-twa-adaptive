@@ -1,0 +1,30 @@
+<article
+  tuiAppearance="floating"
+  tuiCardLarge
+  [routerLink]="['/product', product().id]"
+>
+  <header tuiHeader>
+    <h2 tuiTitle>{{ product().name }}</h2>
+  </header>
+
+  <div tuiCell class="flex justify-center items-center">
+    <img [src]="product().image" style="height: 150px" />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <p>{{ product().price | currency }}</p>
+
+    <tui-rating
+      class="rating"
+      [max]="5"
+      [ngModel]="product().rating"
+      [readOnly]="true"
+    />
+  </div>
+
+  <div class="flex justify-center">
+    <button appearance="secondary" size="m" tuiButton type="button">
+      View More
+    </button>
+  </div>
+</article>
