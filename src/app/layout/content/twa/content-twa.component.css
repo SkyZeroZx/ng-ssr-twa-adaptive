@@ -1,0 +1,10 @@
+.main-twa {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: 80px;
+}
+
+:host {
+  --tui-text-primary: #4c66c3;
+  --t-diameter: 4rem;
+}

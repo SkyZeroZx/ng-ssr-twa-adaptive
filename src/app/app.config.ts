@@ -1,3 +1,5 @@
+import { provideEventPlugins } from '@taiga-ui/event-plugins';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { swRegistrationOptions } from '@/core/service-worker';
 import { provideContextService } from '@/services/context';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -18,6 +20,7 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimationsAsync(),
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
@@ -25,5 +28,6 @@ export const appConfig: ApplicationConfig = {
     provideServiceWorker('ngsw-worker.js', swRegistrationOptions),
     provideHttpClient(withFetch()),
     provideContextService(),
+    provideEventPlugins(),
   ],
 };

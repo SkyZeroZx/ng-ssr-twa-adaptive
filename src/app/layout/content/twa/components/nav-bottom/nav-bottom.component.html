@@ -1,0 +1,31 @@
+<div class="bottom-bar animate-slide-up">
+  <nav tuiTabBar class="bottom-bar__container">
+    <a
+      class="flex flex-col items-center py-3 px-4 rounded-2xl"
+      icon="@tui.house"
+      routerLinkActive
+      tuiTabBarItem
+      [routerLink]="['/']"
+    >
+      Home
+    </a>
+    <a
+      class="flex flex-col items-center py-3 px-4 rounded-2xl"
+      icon="@tui.shopping-bag"
+      routerLinkActive
+      tuiTabBarItem
+      routerLink="/shop-cart"
+    >
+      Shop Cart
+    </a>
+    <a
+      class="flex flex-col items-center py-3 px-4 rounded-2xl"
+      icon="@tui.heart"
+      routerLinkActive
+      tuiTabBarItem
+      routerLink="/wish-list"
+    >
+      Wishlist
+    </a>
+  </nav>
+</div>
