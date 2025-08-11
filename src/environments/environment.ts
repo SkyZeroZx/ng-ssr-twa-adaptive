@@ -1,3 +1,4 @@
 export const environment = {
-  WEB_URL: 'http://localhost:4000'
+  API: 'https://dummyjson.com',
+  WEB_URL: 'http://localhost:4200',
 };
