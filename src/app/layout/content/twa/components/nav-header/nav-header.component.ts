@@ -1,15 +1,16 @@
 import { filter, map, startWith } from 'rxjs';
 
 import { NAV_HEADER_TITLES } from '@/core/constants/headers';
+import { ShopCartService } from '@/services/shop-cart';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
-  signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
-import { TuiIcon } from "@taiga-ui/core";
+import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-nav-header',
@@ -20,7 +21,8 @@ import { TuiIcon } from "@taiga-ui/core";
 })
 export class NavHeaderComponent {
   private readonly router = inject(Router);
-  readonly counter = signal(3);
+  private readonly shopCartService = inject(ShopCartService);
+  readonly counter = computed(() => this.shopCartService.state().length);
 
   readonly data = toSignal(
     this.router.events.pipe(
