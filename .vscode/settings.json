@@ -1,0 +1,11 @@
+{
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.folders.associations": {
+    "TWA": "android",
+    "twa": "android"
+  }
+}
