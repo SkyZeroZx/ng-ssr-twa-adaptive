@@ -4,7 +4,8 @@ import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ProductWebComponent } from '../../../../shared/product/web/product-web.component';
 import { TuiButton, TuiDataList, TuiOption, TuiIcon } from '@taiga-ui/core';
-import { TuiSlider, TuiSelect } from '@taiga-ui/kit';
+import { TuiSlider, TuiSelect, TuiPagination } from '@taiga-ui/kit';
+import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 
 @Component({
   selector: 'app-products-web',
@@ -15,7 +16,9 @@ import { TuiSlider, TuiSelect } from '@taiga-ui/kit';
     TuiOption,
     TuiIcon,
     TuiSlider,
-    TuiSelect
+    TuiSelect,
+    CategoryFilterComponent,
+    TuiPagination,
   ],
   templateUrl: './products-web.component.html',
   styleUrl: './products-web.component.css',
@@ -36,4 +39,8 @@ export default class ProductsWebComponent {
       initialValue: [],
     }
   );
+
+  goToPage(index: number) {
+    console.log('Go to page:', index);
+  }
 }

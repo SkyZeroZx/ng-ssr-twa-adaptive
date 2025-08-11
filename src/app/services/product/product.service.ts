@@ -49,4 +49,8 @@ export class ProductService {
       .get<Product>(`${environment.API}/products/${id}`)
       .pipe(map(toProductCard));
   }
+
+  getCategoryList(): Observable<string[]> {
+    return this.http.get<string[]>(`${environment.API}/products/category-list`);
+  }
 }

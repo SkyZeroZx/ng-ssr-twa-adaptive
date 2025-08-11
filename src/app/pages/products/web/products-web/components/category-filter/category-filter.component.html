@@ -1,0 +1,28 @@
+<aside class="w-64 shrink-0">
+  <div
+    class="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-6"
+  >
+    <!-- Categories Header -->
+    <div class="px-4 py-3 border-b border-gray-200 bg-gray-50 rounded-t-lg">
+      <h3 class="font-semibold text-gray-900">Categories</h3>
+    </div>
+
+    <!-- Categories List -->
+    <div class="p-4">
+      <!-- Subcategories -->
+      <div class="space-y-1 ml-4">
+        <div class="space-y-1">
+          @for (item of categories(); track $index) {
+          <a
+            [routerLink]="`/${item}`"
+            routerLinkActive="active-link"
+            class="block text-sm text-gray-700 hover:text-blue-600 py-1"
+          >
+            {{ item | titlecase }}
+          </a>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

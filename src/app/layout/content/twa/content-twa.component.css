@@ -2,16 +2,12 @@
   min-height: 100vh;
   min-height: 100dvh;
   padding-bottom: 80px;
- 
 }
 
 .full-screen {
- padding-bottom: 0px !important;
+  padding-bottom: 0px !important;
 }
 
-
-
 :host {
- 
   --t-diameter: 4rem;
 }

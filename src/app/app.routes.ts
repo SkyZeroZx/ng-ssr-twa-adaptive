@@ -53,13 +53,18 @@ const WEB_ROUTES: Routes = [
         loadComponent: () =>
           import('./pages/products/web/products-web/products-web.component'),
       },
+      {
+        path: ':category?',
+        loadComponent: () =>
+          import('./pages/products/web/products-web/products-web.component'),
+      },
     ],
   },
 ];
 
 export const routes: Routes = [
   ...WEB_ROUTES,
-  ...TWA_ROUTES,
+  // ...TWA_ROUTES,
   // {
   //   path: '',
   //   canMatch: [canMatchDeviceMobile],

@@ -7,7 +7,6 @@ import {
 import {
   ChangeDetectionStrategy,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   inject,
   signal,
 } from '@angular/core';
