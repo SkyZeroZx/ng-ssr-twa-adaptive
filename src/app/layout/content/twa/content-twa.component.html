@@ -1,13 +1,8 @@
 <tui-pull-to-refresh (pulled)="pulled()">
   <app-nav-header [class.hidden]="isFullScreen()" />
 
-  <main
-    class="main-twa bg-white"
-    [class.full-screen]="isFullScreen()"
-  >
-    <tui-root>
-      <router-outlet />
-    </tui-root>
+  <main class="main-twa bg-white" [class.full-screen]="isFullScreen()">
+    <router-outlet />
   </main>
   <app-nav-bottom [class.hidden]="isFullScreen()" />
 </tui-pull-to-refresh>

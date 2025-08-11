@@ -17,7 +17,6 @@ import {
   TUI_PULL_TO_REFRESH_LOADED,
   TuiPullToRefresh,
 } from '@taiga-ui/addon-mobile';
-import { TuiRoot } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-content-twa',
@@ -26,7 +25,6 @@ import { TuiRoot } from '@taiga-ui/core';
     TuiPullToRefresh,
     NavHeaderComponent,
     NavBottomComponent,
-    TuiRoot,
   ],
   templateUrl: './content-twa.component.html',
   styleUrl: './content-twa.component.css',
@@ -37,7 +35,6 @@ import { TuiRoot } from '@taiga-ui/core';
       useClass: Subject,
     },
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export default class ContentTwaComponent {
   private readonly loaded$ = inject<Subject<void>>(TUI_PULL_TO_REFRESH_LOADED);
