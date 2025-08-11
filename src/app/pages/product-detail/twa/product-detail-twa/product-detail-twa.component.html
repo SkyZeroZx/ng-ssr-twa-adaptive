@@ -1,0 +1,104 @@
+<section class="product-detail-twa">
+  <section class="image-section">
+    <app-carousel
+      [slides]="slides()"
+      [style.view-transition-name]="`product-image-${product().id}`"
+      class="product-carousel"
+    />
+
+    <div class="floating-nav">
+      <button
+        class="nav-btn back-btn"
+        (click)="goBack()"
+        aria-label="Volver atrás"
+      >
+        <tui-icon icon="@tui.chevron-left" class="w-6 h-6 text-gray-800" />
+      </button>
+    </div>
+
+    <div class="floating-actions">
+      <app-button-wish-list class="product-detail-twa__wishlist" />
+
+      <app-shared-button size="small" background="white" />
+    </div>
+  </section>
+
+  <section class="product-info">
+    <div class="info-container">
+      <h1
+        class="product-title"
+        [style.view-transition-name]="`product-title-${product().id}`"
+      >
+        {{ product().name }}
+      </h1>
+
+      <div
+        class="price-section"
+        [style.view-transition-name]="`product-price-${product().id}`"
+      >
+        <span class="current-price"> {{ product().price | currency }}</span>
+      </div>
+
+      <div class="description-section">
+        <p class="description-text">{{ product().description }}</p>
+      </div>
+
+      <div class="size-section">
+        <div class="stock-info">
+          @if (!(product().stock > 0)) {
+          <span class="out-of-stock">
+            <span class="icon-[tabler--x] w-4 h-4"></span>
+            Out of stock
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="categories-section">
+        <h3 class="section-title">Categories</h3>
+        <div class="categories-container">
+          @for (tag of product().tags; track $index) {
+          <span class="category-chip">
+            {{ tag | titlecase }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bottom-actions">
+    <div class="quantity-selector">
+      <button
+        class="quantity-btn"
+        (click)="decreaseQuantity()"
+        [disabled]="quantity() <= 1"
+        aria-label="Disminuir cantidad"
+      >
+        <tui-icon icon="@tui.minus" [style.font-size.px]="16" />
+      </button>
+      <span class="quantity-display">{{ quantity() }}</span>
+      <button
+        class="quantity-btn"
+        (click)="increaseQuantity()"
+        [disabled]="quantity() >= selectedVariation().stock"
+        aria-label="Aumentar cantidad"
+      >
+        <tui-icon icon="@tui.plus" [style.font-size.px]="16" />
+      </button>
+    </div>
+
+    @if (selectedVariation().stock > 0) {
+    <button btn class="add-to-cart-btn" (click)="addToCart()">
+      <tui-icon icon="@tui.plus" [style.font-size.px]="20" />
+      Add
+      {{ selectedVariation().price * quantity() | currency }}
+    </button>
+    } @else {
+    <button class="out-of-stock-btn" disabled>
+      <tui-icon icon="@tui.circle-alert" [style.font-size.px]="20" />
+      Out of stock
+    </button>
+    }
+  </section>
+</section>
