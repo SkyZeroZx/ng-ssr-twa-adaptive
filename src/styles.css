@@ -2,4 +2,13 @@
 
 :root {
   --tui-background-base-alt: #ffffff;
+  --tui-text-primary: #57c1db;
+  --tui-text-action: #57c1db;
+}
+
+::view-transition-old(product-image),
+::view-transition-new(product-image) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
 }
