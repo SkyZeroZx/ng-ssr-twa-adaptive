@@ -1,5 +1,4 @@
-import { provideEventPlugins } from '@taiga-ui/event-plugins';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { appInitialConfig } from '@/core/config/http-cache';
 import { swRegistrationOptions } from '@/core/config/service-worker';
 import { provideContextService } from '@/services/context';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -13,12 +12,14 @@ import {
   withEventReplay,
   withHttpTransferCacheOptions,
 } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideRouter,
   withComponentInputBinding,
   withViewTransitions,
 } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
+import { provideEventPlugins } from '@taiga-ui/event-plugins';
 
 import { routes } from './app.routes';
 
@@ -39,5 +40,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideContextService(),
     provideEventPlugins(),
+    appInitialConfig,
   ],
 };
