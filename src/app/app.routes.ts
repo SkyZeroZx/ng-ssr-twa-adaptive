@@ -9,7 +9,7 @@ import { productResolver } from './core/resolvers/product.resolver';
 const TWA_ROUTES: Routes = [
   {
     path: '',
-    // canMatch: [canMatchDeviceTWA],
+    canMatch: [canMatchDeviceTWA],
     loadComponent: () => import('@/layout/content/twa/content-twa.component'),
     data: {
       header: {
