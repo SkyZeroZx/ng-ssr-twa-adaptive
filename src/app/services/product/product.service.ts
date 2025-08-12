@@ -25,6 +25,7 @@ export class ProductService {
   getProducts(
     paginationOptions: PaginationOptions = PAGINATION_DEFAULT
   ): Observable<PaginationResult<ProductCard>> {
+    let contextURL = `/products/search`;
     let params = new HttpParams();
 
     params = params.append('limit', paginationOptions.limit ?? '10');
@@ -33,8 +34,12 @@ export class ProductService {
 
     params = params.append('q', paginationOptions.search ?? '');
 
+    if (paginationOptions.category) {
+      contextURL = `/products/category/${paginationOptions.category}`;
+    }
+
     return this.http
-      .get<ProductRAW>(`${environment.API}/products/search`, { params })
+      .get<ProductRAW>(`${environment.API}${contextURL}`, { params })
       .pipe(
         map((res) => ({
           data: res.products.map(toProductCard),

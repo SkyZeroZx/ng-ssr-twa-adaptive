@@ -1,7 +1,8 @@
 export interface PaginationOptions {
   limit: number;
   skip: number;
-  search : string;
+  search: string;
+  category?: string;
 }
 
 export interface PaginationMetaData {

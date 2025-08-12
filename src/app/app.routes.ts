@@ -54,7 +54,7 @@ const WEB_ROUTES: Routes = [
           import('./pages/products/web/products-web/products-web.component'),
       },
       {
-        path: ':category?',
+        path: ':category',
         loadComponent: () =>
           import('./pages/products/web/products-web/products-web.component'),
       },
