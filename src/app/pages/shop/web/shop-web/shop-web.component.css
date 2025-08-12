@@ -1,0 +1,149 @@
+/* Sidebar styling */
+.sidebar-category {
+  transition: color 0.2s ease;
+}
+
+.sidebar-category:hover {
+  color: #e47911;
+  text-decoration: none;
+}
+
+/* Selected category state */
+.sidebar-category.active {
+  color: #e47911;
+  font-weight: 600;
+}
+
+/* Filter bar enhancements */
+.filter-bar {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Sort dropdown styling */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* View toggle buttons */
+.view-toggle button.active {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.view-toggle button:not(.active) {
+  color: #6b7280;
+}
+
+.view-toggle button:not(.active):hover {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+/* Product grid optimizations */
+.products-grid {
+  gap: 16px;
+}
+
+/* Ensure cards maintain aspect ratio */
+.product-card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Pagination styling */
+.pagination button {
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #f3f4f6;
+}
+
+.pagination button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Breadcrumb styling */
+.breadcrumb {
+  font-size: 13px;
+}
+
+.breadcrumb a {
+  color: #0066c0;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #e47911;
+  text-decoration: underline;
+}
+
+/* Professional department header */
+.department-header {
+  background: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+  border-bottom: 1px solid #d5d9d9;
+}
+
+/* Sticky sidebar for desktop */
+@media (min-width: 1024px) {
+  .sidebar-sticky {
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .desktop-layout {
+    flex-direction: column;
+  }
+
+  .sidebar-sticky {
+    position: static;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Focus states for accessibility */
+button:focus,
+select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}

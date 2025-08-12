@@ -1,0 +1,383 @@
+/* Desktop Product Detail - Ecommerce Optimized */
+
+/* Main Container */
+.product-detail-web {
+  font-family: "Amazon Ember", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Breadcrumb Enhancement */
+.breadcrumb {
+  font-size: 13px;
+}
+
+.breadcrumb a,
+.breadcrumb button {
+  color: #0066c0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover,
+.breadcrumb button:hover {
+  color: #e47911;
+  text-decoration: underline;
+}
+
+/* Image Gallery */
+.image-gallery {
+  position: sticky;
+  top: 2rem;
+}
+
+.main-image {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.main-image.zoomed {
+  transform: scale(1.5);
+  cursor: zoom-out;
+}
+
+.thumbnail-grid {
+  gap: 8px;
+}
+
+.thumbnail {
+  transition: all 0.2s ease;
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.thumbnail.selected {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Product Information Section */
+.product-info {
+  max-width: 600px;
+}
+
+.product-title {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* Price Section */
+.price-section {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border-left: 4px solid #2563eb;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.current-price {
+  color: #1a365d;
+  font-weight: 800;
+}
+
+.original-price {
+  color: #718096;
+  text-decoration: line-through;
+}
+
+.savings-badge {
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Stock Status */
+.stock-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.stock-indicator.in-stock {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+}
+
+.stock-indicator.low-stock {
+  background: #fffaf0;
+  border: 1px solid #fbd38d;
+}
+
+.stock-indicator.out-of-stock {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.quantity-selector:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.quantity-btn {
+  background: #f8fafc;
+  border: none;
+  padding: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.quantity-btn:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+
+.quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantity-input {
+  border: none;
+  outline: none;
+  text-align: center;
+  font-weight: 600;
+  background: white;
+}
+
+/* Action Buttons */
+.action-buttons {
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f7931e, #e47911);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e47911, #d16807);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(228, 121, 17, 0.3);
+}
+
+.btn-secondary {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Total Price Display */
+.total-price-section {
+  background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Features */
+.features-list {
+  background: #f7fafc;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.feature-icon {
+  color: #38a169;
+  flex-shrink: 0;
+}
+
+/* Tabs Section */
+.tabs-container {
+  margin-top: 4rem;
+}
+
+.tab-nav {
+  border-bottom: 2px solid #e2e8f0;
+  display: flex;
+  gap: 2rem;
+}
+
+.tab-btn {
+  padding: 1rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  color: #6b7280;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.tab-btn:hover {
+  color: #1f2937;
+}
+
+.tab-content {
+  padding: 2rem 0;
+  min-height: 200px;
+}
+
+/* Reviews Section */
+.review-item {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.5rem 0;
+}
+
+.review-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #374151;
+}
+
+.review-content {
+  flex: 1;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-text {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.review-meta {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .image-gallery {
+    position: static;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .tab-nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-info {
+    padding: 1rem;
+  }
+  
+  .product-title {
+    font-size: 1.5rem;
+  }
+  
+  .current-price {
+    font-size: 2rem;
+  }
+  
+  .thumbnail-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .thumbnail {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Focus States */
+button:focus,
+input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

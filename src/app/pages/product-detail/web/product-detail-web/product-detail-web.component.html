@@ -1,1 +1,502 @@
-<p>product-detail-web works!</p>
+<!-- Desktop Product Detail Layout -->
+<div class="min-h-screen bg-gray-50">
+  <!-- Breadcrumb Navigation -->
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <nav class="flex items-center space-x-2 text-sm text-gray-600">
+        <button (click)="goBack()" class="text-blue-600 hover:text-blue-800">
+          <svg
+            class="w-4 h-4 mr-1 inline"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Back
+        </button>
+        <span class="mx-2">›</span>
+        <span class="text-blue-600 hover:text-blue-800 cursor-pointer"
+          >Home</span
+        >
+        <span class="mx-2">›</span>
+        <span class="text-blue-600 hover:text-blue-800 cursor-pointer"
+          >Electronics</span
+        >
+        <span class="mx-2">›</span>
+        <span class="font-medium text-gray-900 truncate">{{
+          product().name
+        }}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Product Content -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Left Column - Product Images -->
+      <div class="space-y-4">
+        <!-- Main Image -->
+        <div
+          class="relative aspect-square bg-white rounded-lg border border-gray-200 overflow-hidden group"
+        >
+          <img
+            [style.view-transition-name]="`product-image-${product().id}`"
+            [src]="productImages()[selectedImageIndex()]"
+            [alt]="product().name"
+            class="w-full h-full object-cover transition-transform duration-300"
+            [class.scale-150]="isZoomed()"
+            (click)="toggleZoom()"
+            style="cursor: zoom-in"
+          />
+
+          <!-- Zoom Icon -->
+          <div
+            class="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <svg
+              class="w-5 h-5 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Thumbnail Images -->
+        <div class="flex space-x-2">
+          @for (image of productImages(); track $index) {
+          <button
+            (click)="selectImage($index)"
+            class="relative aspect-square w-20 bg-white rounded-md border-2 overflow-hidden transition-all"
+            [class.border-blue-500]="selectedImageIndex() === $index"
+            [class.border-gray-200]="selectedImageIndex() !== $index"
+          >
+            <img
+              [src]="image"
+              [alt]="'Product view ' + ($index + 1)"
+              class="w-full h-full object-cover"
+            />
+          </button>
+          }
+        </div>
+      </div>
+
+      <!-- Right Column - Product Information -->
+      <div class="space-y-6">
+        <!-- Product Title & Rating -->
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 mb-3">
+            {{ product().name }}
+          </h1>
+
+          <div class="flex items-center space-x-4 mb-4">
+            <div class="flex items-center">
+              <tui-rating
+                [ngModel]="product().rating"
+                [max]="5"
+                [readOnly]="true"
+                class="text-yellow-400"
+              ></tui-rating>
+              <span class="ml-2 text-sm text-gray-600"
+                >({{ product().rating }}) • 42 reviews</span
+              >
+            </div>
+
+            <div class="flex items-center space-x-2">
+              <button
+                (click)="addToWishlist()"
+                class="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                title="Add to wishlist"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                (click)="shareProduct()"
+                class="p-2 text-gray-400 hover:text-blue-500 transition-colors"
+                title="Share product"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Section -->
+        <div class="border-b border-gray-200 pb-6">
+          <div class="flex items-end space-x-4">
+            <span class="text-4xl font-bold text-gray-900">{{
+              formattedPrice()
+            }}</span>
+            <span class="text-lg text-gray-500 line-through"
+              >€{{ product().price * 1.25 | number : "1.2-2" }}</span
+            >
+            <tui-badge appearance="accent" class="text-sm">20% OFF</tui-badge>
+          </div>
+          <p class="text-sm text-gray-600 mt-2">
+            Free shipping on orders over €50
+          </p>
+        </div>
+
+        <!-- Stock Status -->
+        <div class="flex items-center space-x-2">
+          <div
+            class="w-3 h-3 rounded-full"
+            [class.bg-green-500]="isInStock()"
+            [class.bg-red-500]="!isInStock()"
+          ></div>
+          <span [class]="stockStatusClass()" class="font-medium">{{
+            stockStatus()
+          }}</span>
+        </div>
+
+        <!-- Tags/Categories -->
+        @if (product().tags.length > 0) {
+        <div class="flex flex-wrap gap-2">
+          @for (tag of product().tags; track tag) {
+          <span
+            class="px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full"
+            >{{ tag | titlecase }}</span
+          >
+          }
+        </div>
+        }
+
+        <!-- Quantity & Add to Cart -->
+        <div class="space-y-4 border-t border-gray-200 pt-6">
+          <!-- Quantity Selector -->
+          <div class="flex items-center space-x-4">
+            <label class="text-sm font-medium text-gray-700">Quantity:</label>
+            <div class="flex items-center border border-gray-300 rounded-md">
+              <button
+                (click)="decreaseQuantity()"
+                [disabled]="quantity() <= 1"
+                class="p-2 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20 12H4"
+                  />
+                </svg>
+              </button>
+
+              <input
+                type="number"
+                [value]="quantity()"
+                (input)="setQuantity(+$any($event.target).value)"
+                [max]="product().stock"
+                min="1"
+                class="w-16 py-2 text-center border-0 focus:ring-0"
+              />
+
+              <button
+                (click)="increaseQuantity()"
+                [disabled]="quantity() >= product().stock"
+                class="p-2 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex space-x-4">
+            <button
+              tuiButton
+              appearance="primary"
+              size="l"
+              (click)="addToCart()"
+              [disabled]="!isInStock()"
+              class="flex-1"
+            >
+              <tui-icon icon="@tui.shopping-cart" class="mr-2"></tui-icon>
+              Add to Cart
+            </button>
+
+            <button
+              tuiButton
+              appearance="accent"
+              size="l"
+              (click)="buyNow()"
+              [disabled]="!isInStock()"
+              class="flex-1"
+            >
+              Buy Now
+            </button>
+          </div>
+
+          <!-- Total Price Display -->
+          <div class="bg-gray-50 rounded-lg p-4">
+            <div class="flex justify-between items-center">
+              <span class="text-lg font-medium text-gray-900">Total:</span>
+              <span class="text-2xl font-bold text-gray-900">
+                €{{ totalPrice() | number : "1.2-2" }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Features -->
+        <div class="border-t border-gray-200 pt-6">
+          <h3 class="text-lg font-medium text-gray-900 mb-4">
+            Product Features
+          </h3>
+          <ul class="space-y-2">
+            <li class="flex items-center text-sm text-gray-600">
+              <svg
+                class="w-4 h-4 text-green-500 mr-3"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Free shipping & returns
+            </li>
+            <li class="flex items-center text-sm text-gray-600">
+              <svg
+                class="w-4 h-4 text-green-500 mr-3"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              1-year warranty included
+            </li>
+            <li class="flex items-center text-sm text-gray-600">
+              <svg
+                class="w-4 h-4 text-green-500 mr-3"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              24/7 customer support
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Tabs -->
+    <div class="mt-16">
+      <div class="border-b border-gray-200">
+        <nav class="flex space-x-8">
+          <button
+            (click)="setActiveTab('description')"
+            class="py-4 px-1 border-b-2 font-medium text-sm transition-colors"
+            [class.border-blue-500]="activeTab() === 'description'"
+            [class.text-blue-600]="activeTab() === 'description'"
+            [class.border-transparent]="activeTab() !== 'description'"
+            [class.text-gray-500]="activeTab() !== 'description'"
+          >
+            Description
+          </button>
+          <button
+            (click)="setActiveTab('specifications')"
+            class="py-4 px-1 border-b-2 font-medium text-sm transition-colors"
+            [class.border-blue-500]="activeTab() === 'specifications'"
+            [class.text-blue-600]="activeTab() === 'specifications'"
+            [class.border-transparent]="activeTab() !== 'specifications'"
+            [class.text-gray-500]="activeTab() !== 'specifications'"
+          >
+            Specifications
+          </button>
+          <button
+            (click)="setActiveTab('reviews')"
+            class="py-4 px-1 border-b-2 font-medium text-sm transition-colors"
+            [class.border-blue-500]="activeTab() === 'reviews'"
+            [class.text-blue-600]="activeTab() === 'reviews'"
+            [class.border-transparent]="activeTab() !== 'reviews'"
+            [class.text-gray-500]="activeTab() !== 'reviews'"
+          >
+            Reviews (42)
+          </button>
+        </nav>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="py-8">
+        @switch (activeTab()) { @case ('description') {
+        <div class="prose max-w-none">
+          <p class="text-gray-700 leading-relaxed">
+            {{ product().description }}
+          </p>
+          <h4 class="text-lg font-medium text-gray-900 mt-6 mb-3">
+            Key Features:
+          </h4>
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            <li>High-quality materials and construction</li>
+            <li>Advanced technology integration</li>
+            <li>User-friendly design</li>
+            <li>Durable and long-lasting</li>
+          </ul>
+        </div>
+        } @case ('specifications') {
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-4">
+              Technical Specifications
+            </h4>
+            <dl class="space-y-3">
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">SKU:</dt>
+                <dd class="text-sm font-medium text-gray-900">
+                  {{ product().id }}
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Stock:</dt>
+                <dd class="text-sm font-medium text-gray-900">
+                  {{ product().stock }} units
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Weight:</dt>
+                <dd class="text-sm font-medium text-gray-900">2.5 kg</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Dimensions:</dt>
+                <dd class="text-sm font-medium text-gray-900">
+                  30 x 20 x 10 cm
+                </dd>
+              </div>
+            </dl>
+          </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-4">
+              Additional Info
+            </h4>
+            <dl class="space-y-3">
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Material:</dt>
+                <dd class="text-sm font-medium text-gray-900">
+                  Premium Quality
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Color:</dt>
+                <dd class="text-sm font-medium text-gray-900">
+                  Multiple Options
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-sm text-gray-600">Warranty:</dt>
+                <dd class="text-sm font-medium text-gray-900">1 Year</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        } @case ('reviews') {
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <h4 class="text-lg font-medium text-gray-900">Customer Reviews</h4>
+            <button tuiButton appearance="outline" size="s">
+              Write a Review
+            </button>
+          </div>
+
+          <!-- Sample Review -->
+          <div class="border-b border-gray-200 pb-6">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center"
+                >
+                  <span class="text-sm font-medium text-gray-700">JD</span>
+                </div>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center space-x-2 mb-2">
+                  <h5 class="text-sm font-medium text-gray-900">John Doe</h5>
+                  <tui-rating
+                    [ngModel]="5"
+                    [max]="5"
+                    [readOnly]="true"
+                    class="text-yellow-400"
+                  ></tui-rating>
+                </div>
+                <p class="text-sm text-gray-700">
+                  Excellent product! Highly recommend it. Great quality and fast
+                  shipping.
+                </p>
+                <p class="text-xs text-gray-500 mt-2">
+                  Verified Purchase • 2 weeks ago
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        } }
+      </div>
+    </div>
+  </div>
+</div>

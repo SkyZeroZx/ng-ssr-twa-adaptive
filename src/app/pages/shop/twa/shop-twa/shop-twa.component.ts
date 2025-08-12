@@ -13,13 +13,11 @@ import { TuiSearchResults } from '@taiga-ui/experimental';
 import { TuiCell, TuiInputSearch, TuiNavigation } from '@taiga-ui/layout';
 
 @Component({
-  selector: 'app-products-twa',
+  selector: 'app-shop-twa',
   imports: [
     RouterLink,
     ReactiveFormsModule,
     AsyncPipe,
-    AsyncPipe,
-    ReactiveFormsModule,
     TuiCell,
     TuiInputSearch,
     TuiNavigation,
@@ -31,11 +29,11 @@ import { TuiCell, TuiInputSearch, TuiNavigation } from '@taiga-ui/layout';
     NgTemplateOutlet,
     ProductTwaComponent,
   ],
-  templateUrl: './products-twa.component.html',
-  styleUrl: './products-twa.component.css',
+  templateUrl: './shop-twa.component.html',
+  styleUrl: './shop-twa.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProductsTwaComponent {
+export default class ShopTwaComponent {
   popular = [];
   readonly searchControl = new FormControl<string>('');
   private readonly productService = inject(ProductService);

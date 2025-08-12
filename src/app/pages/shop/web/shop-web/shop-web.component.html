@@ -1,0 +1,99 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <nav class="text-sm text-gray-600">
+        <span class="text-blue-600 hover:text-blue-800 cursor-pointer"
+          >Home</span
+        >
+        <span class="mx-2">›</span>
+        <span class="font-medium text-gray-900">Shop </span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Shop</h1>
+        <p class="text-gray-600">Awesome Products</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-6">
+    <div class="flex gap-6">
+      <app-category-filter />
+
+      <main class="flex-1">
+        <div
+          class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6"
+        >
+          <div class="flex items-center justify-between flex-wrap gap-4">
+            <div class="text-sm text-gray-600">
+              <span class="font-medium">{{ products().length }}</span> results
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium text-gray-700"
+                  >Sort by:</label
+                >
+                <select
+                  class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option>Featured</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                  <option>Customer Reviews</option>
+                  <option>Newest Arrivals</option>
+                </select>
+              </div>
+
+              <div
+                class="flex border border-gray-300 rounded-md overflow-hidden"
+              >
+                <button
+                  class="px-3 py-1.5 text-sm bg-blue-50 text-blue-600 border-r border-gray-300"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
+                  </svg>
+                </button>
+                <button
+                  class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+        >
+          @for (item of products(); track $index) {
+          <app-product-web
+            [style.view-transition-name]="`product-image-${item.id}`"
+            [product]="item"
+            layout="grid"
+            [routerLink]="['/product', item.id]"
+          />
+          }
+        </div>
+
+        <div class="pt-4 pb-4">
+          <tui-pagination
+            [index]="1"
+            [length]="59"
+            (indexChange)="goToPage($event)"
+          />
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

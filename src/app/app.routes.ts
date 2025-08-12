@@ -20,7 +20,7 @@ const TWA_ROUTES: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/products/twa/products-twa/products-twa.component'),
+          import('@/pages/shop/twa/shop-twa/shop-twa.component'),
       },
       {
         path: 'product/:id',
@@ -50,12 +50,22 @@ const WEB_ROUTES: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/products/web/products-web/products-web.component'),
+          import('@/pages/shop/web/shop-web/shop-web.component'),
       },
       {
         path: ':category',
         loadComponent: () =>
-          import('./pages/products/web/products-web/products-web.component'),
+          import('@/pages/shop/web/shop-web/shop-web.component'),
+      },
+      {
+        path: 'product/:id',
+        resolve: {
+          product: productResolver,
+        },
+        loadComponent: () =>
+          import(
+            '@/pages/product-detail/web/product-detail-web/product-detail-web.component'
+          ),
       },
     ],
   },
