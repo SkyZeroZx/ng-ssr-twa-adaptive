@@ -1,26 +1,24 @@
-import { Routes } from '@angular/router';
 import {
   canMatchDeviceDesktop,
   canMatchDeviceMobile,
   canMatchDeviceTWA,
 } from '@/core/guards';
-import { productResolver } from './core/resolvers/product.resolver';
+import { productResolver } from '@/core/resolvers';
+import { Routes } from '@angular/router';
+import { NAV_HEADER_TITLES } from '@/core/constants/headers';
 
 const TWA_ROUTES: Routes = [
   {
     path: '',
+    title: 'Shop TWA',
+    data: {
+      header: NAV_HEADER_TITLES.SHOP,
+    },
     canMatch: [canMatchDeviceTWA],
     loadComponent: () => import('@/layout/content/twa/content-twa.component'),
-    data: {
-      header: {
-        title: 'Products TWA',
-        description: 'Products TWA page description',
-      },
-    },
     children: [
       {
         path: '',
-
         loadComponent: () =>
           import('./pages/products/twa/products-twa/products-twa.component'),
       },
@@ -44,6 +42,7 @@ const TWA_ROUTES: Routes = [
 const WEB_ROUTES: Routes = [
   {
     path: '',
+    title: 'Shop Web',
     canMatch: [canMatchDeviceDesktop],
     loadComponent: () =>
       import('@/layout/content/desktop/content-desktop.component'),

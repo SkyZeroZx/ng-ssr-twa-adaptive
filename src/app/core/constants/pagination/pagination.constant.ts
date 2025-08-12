@@ -1,4 +1,4 @@
-import { PaginationOptions } from '../../interfaces';
+import { PaginationOptions } from '@/core/interfaces';
 
 export const PAGINATION_DEFAULT: PaginationOptions = {
   limit: 10,

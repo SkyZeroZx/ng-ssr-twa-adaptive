@@ -23,8 +23,8 @@ export class SharedButtonComponent {
   async shared() {
     if (this.isBrowser) {
       const sharedProduct = {
-        title: 'Kike Sport - Moda Solo Para Niños',
-        text: 'Encontre este increible modelo de ropa para niño',
+        title: 'Shared Product Title',
+        text: 'Shared Product Description',
         url: window.location.href,
       };
 

@@ -1,4 +1,4 @@
-import { PaginationMetaData, Product, ProductCard } from '../interfaces';
+import { PaginationMetaData, Product, ProductCard } from '@/core/interfaces';
 
 export function createPaginationMetaData(
   total: number,
@@ -31,6 +31,6 @@ export function toProductCard(product: Product): ProductCard {
     price: product.price,
     rating: product.rating,
     stock: product.stock,
-    tags : product.tags,
+    tags: product.tags,
   };
 }

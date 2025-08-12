@@ -1,7 +1,7 @@
-import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import { ProductCard } from '../interfaces';
+import { ProductCard } from '@/core/interfaces';
+import { ProductService } from '@/services/product';
 import { inject } from '@angular/core';
-import { ProductService } from '../../services/product/product.service';
+import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 
 export const productResolver: ResolveFn<ProductCard> = (
   route: ActivatedRouteSnapshot

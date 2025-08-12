@@ -16,9 +16,9 @@ import { HeartWishDirective } from './directive/button-wish-list.directive';
   encapsulation: ViewEncapsulation.None,
 })
 export class ButtonWishListComponent {
-  isWish = model(false);
+  readonly isWish = model(false);
 
-  wClick = output<boolean>();
+  readonly wClick = output<boolean>();
 
   wishClick() {
     this.isWish.set(!this.isWish());

@@ -40,13 +40,13 @@ export class NavHeaderComponent {
           (route.snapshot?.data?.['header'] as {
             title: string;
             description: string;
-          }) ?? NAV_HEADER_TITLES.HOME
+          }) ?? NAV_HEADER_TITLES.SHOP
         );
       })
     ),
     {
       initialValue: {
-        ...NAV_HEADER_TITLES.HOME,
+        ...NAV_HEADER_TITLES.SHOP,
       },
     }
   );

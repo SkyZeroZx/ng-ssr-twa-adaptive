@@ -1,8 +1,7 @@
+import { ContextService } from '@/services/context';
+import { DetectDeviceService } from '@/services/detect-device';
 import { inject } from '@angular/core';
 import { CanMatchFn } from '@angular/router';
-
-import { DetectDeviceService } from '../../services/detect-device/detect-device.service';
-import { ContextService } from '../../services/context/token/context.token';
 
 export const canMatchDeviceMobile: CanMatchFn = () => {
   const detectDeviceService = inject(DetectDeviceService);
