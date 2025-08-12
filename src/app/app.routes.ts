@@ -64,7 +64,7 @@ const WEB_ROUTES: Routes = [
 
 export const routes: Routes = [
   ...WEB_ROUTES,
-  // ...TWA_ROUTES,
+  ...TWA_ROUTES,
   // {
   //   path: '',
   //   canMatch: [canMatchDeviceMobile],
