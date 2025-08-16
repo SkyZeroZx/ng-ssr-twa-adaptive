@@ -16,6 +16,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {
   provideRouter,
   withComponentInputBinding,
+  withRouterConfig,
   withViewTransitions,
 } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -33,6 +34,9 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withViewTransitions({
         skipInitialTransition: true,
+      }),
+      withRouterConfig({
+        onSameUrlNavigation: 'reload',
       })
     ),
     provideClientHydration(withHttpTransferCacheOptions({}), withEventReplay()),

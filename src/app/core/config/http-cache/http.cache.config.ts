@@ -1,5 +1,5 @@
 import { GlobalCacheConfig } from 'ts-cacheable';
- import { provideAppInitializer } from '@angular/core';
+import { provideAppInitializer } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
 /**
@@ -7,11 +7,11 @@ import { environment } from '../../../../environments/environment';
  * configure in the environment file
  */
 function httpCacheConfig() {
-	GlobalCacheConfig.maxAge = environment.httpCache.maxAge;
-	GlobalCacheConfig.maxCacheCount = environment.httpCache.maxCacheCount;
+  GlobalCacheConfig.maxAge = environment.httpCache.maxAge;
+  GlobalCacheConfig.maxCacheCount = environment.httpCache.maxCacheCount;
 }
 
 export function initHttpCache() {
-	return () => httpCacheConfig();
+  return () => httpCacheConfig();
 }
 export const appInitialConfig = provideAppInitializer(initHttpCache());
