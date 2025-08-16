@@ -1,4 +1,3 @@
-import { isDevMode } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 
 function isAndroidAppReferer(referer: string | undefined): boolean {
@@ -9,7 +8,7 @@ export function isValidTWAContext(
   contextValue: string | null,
   referer: string | undefined
 ): boolean {
-  if (true) {
+  if (!environment.twaConfig.production) {
     return contextValue === 'twa';
   }
   return contextValue === 'twa' && isAndroidAppReferer(referer);

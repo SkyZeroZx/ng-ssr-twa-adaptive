@@ -1,6 +1,9 @@
 export const environment = {
   API: 'https://dummyjson.com',
   WEB_URL: 'http://localhost:4200',
+  twaConfig: {
+    production: false,
+  },
   httpCache: {
     /**
      * maxAge of cache in milliseconds
