@@ -27,7 +27,7 @@ export class ShopCartService {
     });
     if (this.isBrowser) {
       effect(() => {
-        if (this.stateShopCart()?.length > 0) {
+        if (this.stateShopCart()?.length >= 0) {
           localStorage.setItem(SHOP_CART, JSON.stringify(this.stateShopCart()));
         }
       });
@@ -62,7 +62,18 @@ export class ShopCartService {
     const stateWithItemRemove = state.filter(
       (productCart) => productToRemove.id !== productCart.id
     );
-
+    console.log(stateWithItemRemove);
     this.stateShopCart.set(stateWithItemRemove);
+  }
+
+  updateQuantity(productCart: ShopCart) {
+    const cart = this.state();
+    const existingIndex = cart.findIndex((cartItem) => cartItem.id === productCart.id);
+    if (existingIndex >= 0) {
+      const updatedCart = cart.map((cartItem, idx) =>
+        idx === existingIndex ? { ...cartItem, quantity: productCart.quantity } : cartItem
+      );
+      this.stateShopCart.set(updatedCart);
+    }
   }
 }
