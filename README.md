@@ -25,34 +25,35 @@ Este repositorio es una guía práctica para implementar una **Progressive Web A
 
 La arquitectura del proyecto está diseñada para ser modular, escalable y optimizada para múltiples plataformas:
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Browser   │    │  Mobile PWA     │    │  Android TWA    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-         ┌─────────────────────────────────────────────┐
-         │         Angular SSR Application             │
-         │  ┌─────────────┐  ┌─────────────┐          │
-         │  │   Client    │  │   Server    │          │
-         │  │   Hydration │  │   Rendering │          │
-         │  └─────────────┘  └─────────────┘          │
-         └─────────────────────────────────────────────┘
-                                 │
-         ┌─────────────────────────────────────────────┐
-         │            DummyJSON API                    │
-         │  • Products     • Users      • Posts       │
-         │  • Comments     • Todos      • Quotes      │
-         │  • Carts        • Auth       • Images      │
-         └─────────────────────────────────────────────┘
-                                 │
-         ┌─────────────────────────────────────────────┐
-         │           PWA Features                      │
-         │  • Service Worker    • Web App Manifest    │
-         │  • Offline Support   • Push Notifications  │
-         │  • Background Sync   • Install Prompts     │
-         └─────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Platforms ["🖥️ Plataformas de Distribución"]
+        WebBrowser["🌐 Web Browser"]
+        MobilePWA["📱 Mobile PWA"]
+        AndroidTWA["🤖 Android TWA"]
+    end
+    
+    subgraph AngularApp ["⚡ Angular SSR Application"]
+        ClientHydration["🔄 Client Hydration"]
+        ServerRendering["🖥️ Server Rendering"]
+    end
+    
+    subgraph API ["🌐 DummyJSON API"]
+        Products["📦 Products"]
+    end
+    
+    subgraph PWAFeatures ["📱 PWA Features"]
+        ServiceWorker["⚙️ Service Worker"]
+        WebManifest["📋 Web App Manifest"]
+        OfflineSupport["📴 Offline Support"]
+        PushNotifications["🔔 Push Notifications"]
+        InstallPrompts["⬇️ Install Prompts"]
+    end
+    
+    Platforms --> AngularApp
+    AngularApp --> API
+    AngularApp --> PWAFeatures
+    ClientHydration <--> ServerRendering
 ```
 
 ### Componentes
