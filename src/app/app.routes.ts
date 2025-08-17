@@ -1,3 +1,4 @@
+import { NAV_HEADER_TITLES } from '@/core/constants/headers';
 import {
   canMatchDeviceDesktop,
   canMatchDeviceMobile,
@@ -5,7 +6,6 @@ import {
 } from '@/core/guards';
 import { productResolver } from '@/core/resolvers';
 import { Routes } from '@angular/router';
-import { NAV_HEADER_TITLES } from '@/core/constants/headers';
 
 const TWA_ROUTES: Routes = [
   {
@@ -71,22 +71,26 @@ const WEB_ROUTES: Routes = [
   },
 ];
 
-export const routes: Routes = [
-  ...WEB_ROUTES,
-  ...TWA_ROUTES,
-  // {
-  //   path: '',
-  //   canMatch: [canMatchDeviceMobile],
-  //   loadComponent: () =>
-  //     import('@/layout/content/mobile/content-mobile.component'),
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadComponent: () =>
-  //         import(
-  //           './pages/products/mobile/products-mobile/products-mobile.component'
-  //         ),
-  //     },
-  //   ],
-  // },
+const MOBILE_ROUTES: Routes = [
+  {
+    path: '',
+    canMatch: [canMatchDeviceMobile],
+    title: 'Shop Mobile',
+    loadComponent: () =>
+      import('@/layout/content/mobile/content-mobile.component'),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('@/pages/shop/mobile/shop-mobile/shop-mobile.component'),
+      },
+      {
+        path: ':category',
+        loadComponent: () =>
+          import('@/pages/shop/mobile/shop-mobile/shop-mobile.component'),
+      },
+    ],
+  },
 ];
+
+export const routes: Routes = [...WEB_ROUTES, ...TWA_ROUTES, ...MOBILE_ROUTES];

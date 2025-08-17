@@ -23,9 +23,9 @@ import { ActivatedRoute } from '@angular/router';
   template: '',
 })
 export abstract class ShopBaseComponent {
-  private readonly productService = inject(ProductService);
+  protected readonly productService = inject(ProductService);
 
-  private readonly activateRoute = inject(ActivatedRoute);
+  protected readonly activateRoute = inject(ActivatedRoute);
 
   private readonly category$ = this.activateRoute.params.pipe(
     map((params) => params['category'] as string)

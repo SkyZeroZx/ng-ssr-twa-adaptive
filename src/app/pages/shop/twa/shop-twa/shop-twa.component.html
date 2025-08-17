@@ -1,7 +1,10 @@
-<div class="min-h-screen">
+<section class="min-h-screen">
   <div class="flex justify-center">
     <div class="flex pt-2 pb-2 items-center gap-3" style="width: 96dvw">
-      <tui-textfield (pointerdown.capture.stop)="(0)" [tuiTextfieldCleaner]="false">
+      <tui-textfield
+        (pointerdown.capture.stop)="(0)"
+        [tuiTextfieldCleaner]="false"
+      >
         <input
           #searchInput
           style="width: 96dvw"
@@ -32,20 +35,42 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-2 gap-4 pt-4 pr-2 pl-2">
-    @for (item of results()['products']; track item.id) {
-    <app-product-twa
-      [style.view-transition-name]="`product-image-${item.id}`"
-      [product]="item"
-      class="w-full"
-    />
-    } @empty {
-    <ng-content *ngTemplateOutlet="loading" />
-    }
-  </div>
-</div>
+  <section
+    scrollEnd
+    class="grid grid-cols-2 gap-4 pt-4 pr-2 pl-2"
+    (nearEnd)="loadMore()"
+  >
 
-<ng-template #loading>
+    @if (firstLoad()) {
+    <ng-container *ngTemplateOutlet="skeleton"></ng-container>
+    } 
+
+    @else {
+
+       @for (item of products(); track $index) {
+        <app-product-twa
+          [style.view-transition-name]="`product-image-${item.id}`"
+          [product]="item"
+          class="w-full"
+        />
+        } 
+   } 
+   
+    @if(listProducts.isLoading()) {
+    <ng-container *ngTemplateOutlet="skeleton" />
+    }
+    
+      @if(endOfList()) {
+      <div class="p-4">
+        <p class="text-2xl font-bold text-center text-gray-700">
+          End of list products
+        </p>
+      </div>
+    }
+  </section>
+</section>
+
+<ng-template #skeleton>
   @for (_ of [].constructor(6); track $index) {
   <ngx-skeleton-loader
     appearance="square"

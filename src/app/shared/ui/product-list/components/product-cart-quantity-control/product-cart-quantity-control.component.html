@@ -1,0 +1,52 @@
+<div class="product-cart-quantity-control">
+  <div class="product-cart-quantity-control__container">
+    <button
+      class="product-cart-quantity-control__container__button"
+      (click)="clickedUpdate(+1)"
+      aria-label="Add 1 unit"
+    >
+      <tui-icon
+        class="product-cart-quantity-control__container__button__icon--plus"
+        icon="@tui.plus"
+        [style.font-size.px]="16"
+      />
+    </button>
+  </div>
+
+  <div>
+    <input
+      onlyNumber
+      aria-label="Product quantity"
+      type="number"
+      [formControl]="quantityControl"
+      min="1"
+      class="form-control-quantity"
+    />
+  </div>
+
+  <div class="product-cart-quantity-control__container">
+    @if (quantityControl.value <= 1) {
+    <button
+      (click)="clickRemove()"
+      class="product-cart-quantity-control__container__button"
+    >
+      <tui-icon
+        class="product-cart-quantity-control__container__button__icon--trash"
+        icon="@tui.trash"
+        [style.font-size.px]="16"
+      />
+    </button>
+    } @else {
+    <button
+      (click)="clickedUpdate(-1)"
+      class="product-cart-quantity-control__container__button"
+    >
+      <tui-icon
+        class="product-cart-quantity-control__container__button__icon--minus"
+        icon="@tui.minus"
+        [style.font-size.px]="16"
+      />
+    </button>
+    }
+  </div>
+</div>

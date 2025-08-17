@@ -1,16 +1,18 @@
 import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
 import { debounceTime, filter, map, startWith, switchMap } from 'rxjs';
 
-import { ProductService } from '@/services/product/product.service';
-import { ProductTwaComponent } from '@/shared/product/twa/product-twa.component';
+import { ScrollEndDirective } from '@/shared/directives/scroll-end';
+import { ProductTwaComponent } from '@/shared/ui/product/twa';
 import { AsyncPipe, CurrencyPipe, NgTemplateOutlet } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TuiTextfield, TuiTitle } from '@taiga-ui/core';
 import { TuiSearchResults } from '@taiga-ui/experimental';
 import { TuiCell, TuiInputSearch, TuiNavigation } from '@taiga-ui/layout';
+
+import { ShopBaseComponent } from '../../base/shop-base.component';
 
 @Component({
   selector: 'app-shop-twa',
@@ -28,15 +30,15 @@ import { TuiCell, TuiInputSearch, TuiNavigation } from '@taiga-ui/layout';
     CurrencyPipe,
     NgTemplateOutlet,
     ProductTwaComponent,
+    ScrollEndDirective,
   ],
   templateUrl: './shop-twa.component.html',
   styleUrl: './shop-twa.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ShopTwaComponent {
+export default class ShopTwaComponent extends ShopBaseComponent {
   popular = [];
   readonly searchControl = new FormControl<string>('');
-  private readonly productService = inject(ProductService);
 
   readonly results$ = this.searchControl.valueChanges.pipe(
     debounceTime(300),

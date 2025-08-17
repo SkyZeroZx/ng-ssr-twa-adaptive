@@ -32,5 +32,6 @@ export function toProductCard(product: Product): ProductCard {
     rating: product.rating,
     stock: product.stock,
     tags: product.tags,
+    category : product.category,
   };
 }

@@ -18,8 +18,8 @@
       }}</span>
     </div>
 
-    <div class="relative">
-      <a
+    <button class="relative" (click)="showSheetDialog()">
+      <div
         class="w-11 h-11 bg-primary rounded-xl flex items-center justify-center transition-all duration-200 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-300"
       >
         <tui-icon
@@ -27,12 +27,12 @@
           [style.font-size.px]="36"
           class="text-[#57c1db]"
         />
-      </a>
+      </div>
       <div
         class="absolute -top-2 -right-2 w-5 h-5 bg-[#57c1db] rounded-full flex items-center justify-center"
       >
         <span class="text-xs font-bold text-white">{{ counter() }} </span>
       </div>
-    </div>
+    </button>
   </div>
 </nav>

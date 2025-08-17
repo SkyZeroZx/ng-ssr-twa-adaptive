@@ -1,13 +1,13 @@
 import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
 
-import { ProductWebComponent } from '@/shared/product/web/product-web.component';
+import { ProductWebComponent } from '@/shared/ui/product/web';
 import { NgTemplateOutlet } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TuiButton } from '@taiga-ui/core';
 
-import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 import { ShopBaseComponent } from '../../base/shop-base.component';
+import { CategoryFilterComponent } from './components/category-filter/category-filter.component';
 
 @Component({
   selector: 'app-shop-web',

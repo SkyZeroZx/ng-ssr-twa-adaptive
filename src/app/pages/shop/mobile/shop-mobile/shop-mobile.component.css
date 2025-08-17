@@ -1,0 +1,151 @@
+/* Mobile Shop Component Styles */
+
+/* Header styles */
+header {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Button customizations */
+button[tuiButton] {
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+button[tuiButton]:active {
+  transform: scale(0.98);
+}
+
+/* Filter panel animations */
+.filter-panel {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Grid responsive improvements */
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Product card hover effects */
+app-product-web {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+app-product-web:hover {
+  transform: translateY(-2px);
+}
+
+/* Loading skeleton customizations */
+ngx-skeleton-loader {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Scrollbar styling for webkit browsers */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Status messages styling */
+.status-message {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Empty state improvements */
+.empty-state {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive improvements */
+@media (max-width: 640px) {
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .grid-cols-2 {
+    gap: 0.75rem;
+  }
+
+  /* Optimize touch targets */
+  button[tuiButton] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .grid-cols-2 {
+    gap: 0.5rem;
+  }
+}
+
+/* Safe area handling for devices with notches */
+@supports (padding: max(0px)) {
+  header {
+    padding-top: max(0.75rem, env(safe-area-inset-top));
+  }
+}
+
+/* Accessibility improvements */
+
+/* Focus styles for keyboard navigation */
+button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}

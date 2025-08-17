@@ -1,0 +1,50 @@
+<tui-swipe-actions>
+  <article class="product-item-list">
+    <div
+      class="product-container"
+      [class.product-container--swipe-to-remove]="isSwipe()"
+    >
+      <div class="product-item-list__image">
+        <img
+          width="125"
+          height="139"
+          [src]="productCart().image"
+          [alt]="productCart().name"
+          priority
+          sizes="(min-width: 500px) 13vw, 13vh , (min-width: 768px) 100w, 100w , (min-width: 1200px) 650w, 600w"
+        />
+      </div>
+
+      <div class="product-details">
+        <div class="product-name">
+          {{ productCart().name | titlecase }}
+        </div>
+      </div>
+
+      <div class="product-cart-options">
+        <ng-content select="[productQuantity]" />
+      </div>
+    </div>
+  </article>
+
+  <div tuiSwipeAction class="product-actions">
+    <a
+      class="product-actions__container"
+      [routerLink]="['/product', productCart().id]"
+    >
+      <tui-icon
+        class="product-actions__container__icon"
+        icon="@tui.eye"
+        [style.font-size.px]="16"
+      />
+    </a>
+
+    <button class="product-actions__container" (click)="clickedRemove()">
+      <tui-icon
+        class="product-actions__container__icon"
+        icon="@tui.trash"
+        [style.font-size.px]="16"
+      />
+    </button>
+  </div>
+</tui-swipe-actions>

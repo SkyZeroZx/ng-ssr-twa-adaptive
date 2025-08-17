@@ -1,20 +1,26 @@
+import { ProductCard } from '@/core/interfaces';
+import { CurrencyPipe, SlicePipe, TitleCasePipe } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
   input,
   output,
   signal,
-  computed,
 } from '@angular/core';
-import { TuiButton, TuiIcon } from '@taiga-ui/core';
- import { ProductCard } from '../../../core/interfaces/product-card.interface';
 import { FormsModule } from '@angular/forms';
-import { CurrencyPipe, SlicePipe, TitleCasePipe } from '@angular/common';
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-product-web',
-  standalone: true,
-  imports: [FormsModule, TuiButton, CurrencyPipe, TuiIcon , SlicePipe , TitleCasePipe],
+  imports: [
+    FormsModule,
+    TuiButton,
+    CurrencyPipe,
+    TuiIcon,
+    SlicePipe,
+    TitleCasePipe,
+  ],
   templateUrl: './product-web.component.html',
   styleUrls: ['./product-web.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
