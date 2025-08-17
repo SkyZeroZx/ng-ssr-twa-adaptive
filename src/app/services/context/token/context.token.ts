@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 /**
  * Abstract service for managing application context
  * Determines if the app is running as a TWA (Trusted Web Activity)
@@ -13,3 +15,7 @@ export abstract class ContextService {
    */
   abstract isTWA(): boolean;
 }
+
+export const CONTEXT_VALUE = new InjectionToken<string>('CONTEXT_VALUE', {
+  factory: () => 'twa',
+});

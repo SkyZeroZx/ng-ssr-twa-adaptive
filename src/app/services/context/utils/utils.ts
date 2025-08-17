@@ -1,18 +1,9 @@
 import { environment } from '../../../../environments/environment';
 
-function isAndroidAppReferer(referer: string | undefined): boolean {
+export function isAndroidAppReferer(referer: string | undefined): boolean {
   return referer?.includes('android-app') ?? false;
 }
 
-export function isValidTWAContext(
-  contextValue: string | null,
-  referer: string | undefined
-): boolean {
-  if (!environment.twaConfig.production) {
-    return contextValue === 'twa';
-  }
-  return contextValue === 'twa' && isAndroidAppReferer(referer);
-}
 
 export function getCookies(
   cookies: string | undefined

@@ -1,9 +1,9 @@
 import { inject, Injectable, REQUEST, RESPONSE_INIT } from '@angular/core';
-import { ContextService } from '../../token/context.token';
+import { CONTEXT_VALUE, ContextService } from '../../token/context.token';
 import {
   getContextFromURL,
   getCookies,
-  isValidTWAContext,
+  isAndroidAppReferer,
 } from '../../utils/utils';
 
 @Injectable({
@@ -12,18 +12,20 @@ import {
 export class ContextServerService implements ContextService {
   private readonly request = inject(REQUEST);
   private readonly responseInit = inject(RESPONSE_INIT, { optional: true });
+  private readonly contextValue = inject(CONTEXT_VALUE);
   private ctx = '';
 
   setupContext(): void {
     const cookies = getCookies(this.request?.headers.get('cookie')!);
 
-    const contextValue =
-      cookies?.['_ctx'] ?? getContextFromURL(this.request!.url);
+    const context = cookies?.['_ctx'] ?? getContextFromURL(this.request!.url);
 
     const referer = this.request!.headers.get('referer')!;
 
-    if (isValidTWAContext(contextValue, referer)) {
-      this.ctx = 'twa';
+    const isValidContext = this.contextValue === context;
+
+    if (isAndroidAppReferer(referer) && isValidContext) {
+      this.ctx = this.contextValue;
       const headers = new Headers(this.responseInit!.headers);
 
       const cookieString = `_ctx=${this.ctx}; Path=/; Max-Age=${
@@ -37,6 +39,6 @@ export class ContextServerService implements ContextService {
   }
 
   isTWA(): boolean {
-    return this.ctx === 'twa';
+    return this.ctx === this.contextValue;
   }
 }
