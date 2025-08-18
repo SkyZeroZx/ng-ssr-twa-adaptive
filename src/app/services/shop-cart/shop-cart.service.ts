@@ -3,12 +3,13 @@ import { objectCompare } from '@/core/util';
 import { isPlatformBrowser } from '@angular/common';
 import {
   afterNextRender,
-  effect,
   inject,
   Injectable,
   PLATFORM_ID,
   signal,
 } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { skip } from 'rxjs';
 
 const SHOP_CART = 'SHOP_CART';
 
@@ -25,12 +26,15 @@ export class ShopCartService {
         JSON.parse(localStorage.getItem(SHOP_CART) ?? '[]') ?? []
       );
     });
+
     if (this.isBrowser) {
-      effect(() => {
-        if (this.stateShopCart()?.length >= 0) {
-          localStorage.setItem(SHOP_CART, JSON.stringify(this.stateShopCart()));
-        }
-      });
+      toObservable(this.state)
+        .pipe(skip(1))
+        .subscribe((state) => {
+          if (state.length >= 0) {
+            localStorage.setItem(SHOP_CART, JSON.stringify(state));
+          }
+        });
     }
   }
 
@@ -62,16 +66,20 @@ export class ShopCartService {
     const stateWithItemRemove = state.filter(
       (productCart) => productToRemove.id !== productCart.id
     );
-    console.log(stateWithItemRemove);
+
     this.stateShopCart.set(stateWithItemRemove);
   }
 
   updateQuantity(productCart: ShopCart) {
     const cart = this.state();
-    const existingIndex = cart.findIndex((cartItem) => cartItem.id === productCart.id);
+    const existingIndex = cart.findIndex(
+      (cartItem) => cartItem.id === productCart.id
+    );
     if (existingIndex >= 0) {
       const updatedCart = cart.map((cartItem, idx) =>
-        idx === existingIndex ? { ...cartItem, quantity: productCart.quantity } : cartItem
+        idx === existingIndex
+          ? { ...cartItem, quantity: productCart.quantity }
+          : cartItem
       );
       this.stateShopCart.set(updatedCart);
     }
