@@ -13,9 +13,8 @@
   >
     <app-cart-quantity-control
       productQuantity
-      [quantity]="product.quantity"
       [productCart]="product"
-      (productCartChange)="changeQuantity($any($event))"
+      (productCartChange)="changeQuantity($event)"
       (removeProduct)="remove($event)"
     />
   </app-product-item-list>

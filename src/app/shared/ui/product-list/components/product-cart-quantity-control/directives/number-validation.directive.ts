@@ -1,25 +1,27 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[onlyNumber]',
+  host: {
+    '(keydown)': 'onInputChange($event)',
+  },
 })
 export class NumberValidationDirective {
-  constructor(private readonly elementRef: ElementRef<HTMLInputElement>) {}
+  private readonly elementRef = inject(ElementRef<HTMLInputElement>);
+  private readonly allowedKeys = [
+    'Backspace',
+    'Tab',
+    'ArrowLeft',
+    'ArrowDown',
+    'ArrowUp',
+    'ArrowRight',
+    'Home',
+    'End',
+  ];
 
-  @HostListener('keydown', ['$event']) onInputChange(event: KeyboardEvent) {
+  onInputChange(event: KeyboardEvent) {
     const inputValue = this.elementRef.nativeElement.value;
-
-    const allowedKeys = [
-      'Backspace',
-      'Tab',
-      'ArrowLeft',
-      'ArrowDown',
-      'ArrowUp',
-      'ArrowRight',
-      'Home',
-      'End',
-    ];
 
     const inputLength = inputValue.length;
 
@@ -27,7 +29,7 @@ export class NumberValidationDirective {
       event.preventDefault();
     }
 
-    if (allowedKeys.includes(event.key)) {
+    if (this.allowedKeys.includes(event.key)) {
       return;
     }
 
