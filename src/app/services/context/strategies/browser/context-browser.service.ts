@@ -4,6 +4,7 @@ import {
   getContextFromURL,
   getCookies,
   isAndroidAppReferer,
+  isMobile,
 } from '../../utils/utils';
 
 @Injectable({
@@ -18,12 +19,32 @@ export class ContextBrowserService implements ContextService {
     const cookies = getCookies(this.document.cookie);
     const context = cookies?.['_ctx'] ?? getContextFromURL(this.document.URL);
 
-    if (isAndroidAppReferer(this.document.referrer)) {
+    const isValidContext = context === this.contextValue;
+
+    if (isValidContext && isAndroidAppReferer(this.document.referrer)) {
       this.ctx = this.contextValue;
     }
   }
 
-  isTWA(): boolean {
+  private validateContext(): boolean {
     return this.ctx === this.contextValue;
+  }
+
+  isMobile(): boolean {
+    return (
+      isMobile(this.document.defaultView?.navigator?.userAgent) &&
+      !this.validateContext()
+    );
+  }
+
+  isDesktop(): boolean {
+    return !isMobile(this.document.defaultView?.navigator?.userAgent);
+  }
+
+  isTWA(): boolean {
+    return (
+      this.validateContext() &&
+      isMobile(this.document.defaultView?.navigator?.userAgent)
+    );
   }
 }

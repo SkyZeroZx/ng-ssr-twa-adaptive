@@ -4,6 +4,21 @@ export function isAndroidAppReferer(referer: string | undefined): boolean {
   return referer?.includes('android-app') ?? false;
 }
 
+export function isMobile(userAgent: string = '') {
+  const mobileKeywords = [
+    'Android',
+    'MacIntel',
+    'Motorola',
+    'Nintendo',
+    'iPhone',
+    'iPad',
+    'iPod',
+    'Windows Phone',
+    'BlackBerry',
+    'Mobile',
+  ];
+  return mobileKeywords.some((keyword) => userAgent?.includes(keyword));
+}
 
 export function getCookies(
   cookies: string | undefined

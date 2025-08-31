@@ -11,6 +11,16 @@ export abstract class ContextService {
   abstract setupContext(): void;
 
   /**
+   * Returns true if the application is running on a mobile device
+   */
+  abstract isMobile(): boolean;
+
+  /**
+   * Returns true if the application is running on a desktop device
+   */
+  abstract isDesktop(): boolean;
+
+  /**
    * Returns true if the application is running as a TWA
    */
   abstract isTWA(): boolean;
