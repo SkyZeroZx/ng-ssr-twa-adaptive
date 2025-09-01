@@ -323,3 +323,108 @@ export class AnalyticsService {
 - ✅ **Zero layout shift** guarantee
 
 Esta arquitectura representa la **evolución natural del desarrollo web moderno**, donde una sola aplicación Angular puede ofrecer experiencias nativas optimizadas para web, PWA, y aplicaciones Android, manteniendo la simplicidad del desarrollo y maximizando el performance en cada contexto.
+
+
+## Generar TWA (Trusted Web Activity)
+
+### Prerrequisitos
+
+Antes de generar la TWA, asegúrate de tener instaladas las siguientes herramientas:
+
+```bash
+# Instalar Bubblewrap CLI globalmente
+npm install -g @bubblewrap/cli
+
+# Verificar instalación
+bubblewrap --version
+```
+
+**Requisitos adicionales:**
+- Android Studio instalado y configurado
+- Java Development Kit (JDK) 8 o superior
+- Android SDK configurado con las herramientas de build
+
+### Proceso de Generación
+
+#### 1. **Validar Web App Manifest**
+
+Verifica que el manifest esté correctamente desplegado y accesible:
+
+```bash
+# Validar manifest en producción
+curl -I https://ng-ssr-twa-adaptive.vercel.app/manifest.webmanifest
+```
+
+**URL de validación:** https://ng-ssr-twa-adaptive.vercel.app/manifest.webmanifest
+
+#### 2. **Inicializar Proyecto TWA**
+
+```bash
+# Crear el proyecto TWA con el manifest
+bubblewrap init --manifest=https://ng-ssr-twa-adaptive.vercel.app/manifest.webmanifest
+```
+
+#### 3. **Configuración Context-Aware**
+
+**Aspecto Crítico:** Configura la URL de inicio para aprovechar la arquitectura context-aware:
+
+```bash
+# Durante la inicialización, configurar:
+Start URL: /?ctx=twa
+```
+
+Esta configuración permite que:
+- El servidor detecte automáticamente el contexto TWA
+- Se renderice la UI optimizada para experiencia nativa
+- Se apliquen las optimizaciones específicas de Android
+
+#### 4. **Configurar Digital Asset Links**
+
+Asegúrate de que el archivo `.well-known/assetlinks.json` esté correctamente configurado en tu dominio para establecer la relación de confianza entre la app web y la TWA.
+
+#### 5. **Generar APK**
+
+```bash
+# Construir la aplicación Android
+bubblewrap build
+
+# Para builds de release (Google Play)
+bubblewrap build --release
+```
+
+### Configuraciones Avanzadas
+
+#### **Personalización del Context Parameter**
+
+Si modificas el parámetro de contexto en el `ContextService`, actualiza correspondientemente la URL de inicio:
+
+```typescript
+// Si cambias en el service de: 'ctx=twa' a 'context=android'
+// Actualiza la Start URL a: /?context=android
+```
+
+### Deployment y Testing
+
+#### **Testing Local**
+
+```bash
+# Instalar APK en dispositivo/emulador
+adb install app-release-signed.apk
+
+# Debug con Chrome DevTools
+chrome://inspect/#devices
+```
+
+#### **Validación de Contexto**
+
+Verifica que la detección funcione correctamente:
+1. Abrir la TWA en dispositivo Android
+2. Verificar que se muestre la UI optimizada para contexto nativo
+3. Confirmar que analytics trackee correctamente el contexto 'twa'
+
+### Recursos Adicionales
+
+- * [Google Codelabs - PWA to Play Store](https://developers.google.com/codelabs/pwa-in-play)**
+- **[Bubblewrap Documentation](https://github.com/GoogleChromeLabs/bubblewrap)**
+- **[Digital Asset Links](https://developers.google.com/digital-asset-links)**
+- **[TWA Best Practices](https://web.dev/trusted-web-activity/)**
