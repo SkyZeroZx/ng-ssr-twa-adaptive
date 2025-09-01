@@ -1,1 +1,14 @@
-{}
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "app.vercel.ng_ssr_twa_adaptive.twa",
+            "sha256_cert_fingerprints": [
+                "FB:AF:E5:0F:CE:D3:D2:B3:A8:63:6C:16:AE:8A:60:4C:67:0E:68:93:B5:D0:E3:B2:BC:82:DC:83:B2:0F:97:8C"
+            ]
+        }
+    }
+]
