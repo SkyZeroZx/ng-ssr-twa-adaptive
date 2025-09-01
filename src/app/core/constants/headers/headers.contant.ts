@@ -6,5 +6,10 @@ export const NAV_HEADER_TITLES = {
 	CART: {
 		title: 'Shop Cart',
 		description: 'Discover your purchase'
+	},
+	WISH: {
+		title: 'Shop Wishlist',
+		description: 'Discover your saved items'
 	}
+
 };

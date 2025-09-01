@@ -1,3 +1,4 @@
+import { onViewTransitionCreated } from '@/core/animations';
 import { appInitialConfig } from '@/core/config/http-cache';
 import { swRegistrationOptions } from '@/core/config/service-worker';
 import { provideContextService } from '@/services/context';
@@ -33,6 +34,7 @@ export const appConfig: ApplicationConfig = {
       routes,
       withComponentInputBinding(),
       withViewTransitions({
+        onViewTransitionCreated,
         skipInitialTransition: true,
       }),
       withRouterConfig({

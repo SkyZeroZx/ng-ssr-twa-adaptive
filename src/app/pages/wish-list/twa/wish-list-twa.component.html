@@ -1,0 +1,11 @@
+<section class="flex flex-col pt-4 pr-2 pl-2">
+  @for (item of wishList(); track $index) {
+  <app-product-twa
+    [style.view-transition-name]="`product-image-${item.id}`"
+    [product]="item"
+    class="w-full"
+  />
+  } @empty {
+  <p class="text-center text-3xl text-gray-600">No items in wish list</p>
+  }
+</section>

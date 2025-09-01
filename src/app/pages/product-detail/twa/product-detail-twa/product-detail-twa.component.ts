@@ -1,4 +1,10 @@
 import { ProductCard } from '@/core/interfaces';
+import { ShopCartService } from '@/services/shop-cart';
+import { WishListService } from '@/services/wish-list';
+import { ButtonWishListComponent } from '@/shared/ui/button-wish-list';
+import { CarouselComponent } from '@/shared/ui/carousel/carousel.component';
+import { Slide } from '@/shared/ui/carousel/carousel.interface';
+import { SharedButtonComponent } from '@/shared/ui/shared-button';
 import { CurrencyPipe, Location, TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -11,12 +17,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CarouselComponent } from '@/shared/ui/carousel/carousel.component';
-import { Slide } from '@/shared/ui/carousel/carousel.interface';
-import { ButtonWishListComponent } from '@/shared/ui/button-wish-list';
-import { SharedButtonComponent } from '@/shared/ui/shared-button';
 import { TuiAlertService, TuiIcon } from '@taiga-ui/core';
-import { ShopCartService } from '../../../../services/shop-cart';
 
 @Component({
   selector: 'app-product-detail-twa',
@@ -27,7 +28,7 @@ import { ShopCartService } from '../../../../services/shop-cart';
     SharedButtonComponent,
     TuiIcon,
     CurrencyPipe,
-    TitleCasePipe
+    TitleCasePipe,
   ],
   templateUrl: './product-detail-twa.component.html',
   styleUrl: './product-detail-twa.component.css',
@@ -37,7 +38,14 @@ import { ShopCartService } from '../../../../services/shop-cart';
 export default class ProductDetailTwaComponent {
   private readonly shopCartService = inject(ShopCartService);
   private readonly alertService = inject(TuiAlertService);
+  private readonly wishListService = inject(WishListService);
+
   product = input.required<ProductCard>();
+
+  readonly isProductInWishList = computed(() => {
+    return this.wishListService.state().some(item => item.id === this.product().id);
+  });
+
   readonly slides = computed(() => {
     return [
       {
@@ -76,5 +84,9 @@ export default class ProductDetailTwaComponent {
     });
 
     this.alertService.open('Product added to cart').subscribe();
+  }
+
+  addToWishList() {
+    this.wishListService.addOrRemove(this.product());
   }
 }

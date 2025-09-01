@@ -17,7 +17,11 @@
     </div>
 
     <div class="floating-actions">
-      <app-button-wish-list class="product-detail-twa__wishlist" />
+      <app-button-wish-list
+        [isWish]="isProductInWishList()"
+        class="product-detail-twa__wishlist"
+        (wClick)="addToWishList()"
+      />
 
       <app-shared-button size="small" background="white" />
     </div>

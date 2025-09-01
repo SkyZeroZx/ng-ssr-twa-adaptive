@@ -23,6 +23,22 @@ const TWA_ROUTES: Routes = [
           import('@/pages/shop/twa/shop-twa/shop-twa.component'),
       },
       {
+        path: 'shop-cart',
+        data: {
+          header: NAV_HEADER_TITLES.CART,
+        },
+        loadComponent: () =>
+          import('@/pages/shop-cart/twa/shop-cart-twa.component'),
+      },
+      {
+        path: 'wish-list',
+        data: {
+          header: NAV_HEADER_TITLES.WISH,
+        },
+        loadComponent: () =>
+          import('@/pages/wish-list/twa/wish-list-twa.component'),
+      },
+      {
         path: 'product/:id',
         data: {
           fullScreen: true,
