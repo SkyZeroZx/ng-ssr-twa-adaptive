@@ -24,14 +24,10 @@ export function provideContextService(context?: string): Provider {
         const isServer = isPlatformServer(platformId);
 
         if (isServer) {
-          const contextServer = inject(ContextServerService);
-          contextServer.setupContext();
-          return contextServer;
+          return inject(ContextServerService);
         }
 
-        const contextBrowser = inject(ContextBrowserService);
-        contextBrowser.setupContext();
-        return contextBrowser;
+        return inject(ContextBrowserService);
       },
     },
   ];

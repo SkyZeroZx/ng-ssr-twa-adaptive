@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, Signal } from '@angular/core';
 
 /**
  * Abstract service for managing application context
@@ -13,17 +13,17 @@ export abstract class ContextService {
   /**
    * Returns true if the application is running on a mobile device
    */
-  abstract isMobile(): boolean;
+  abstract readonly isMobile: Signal<boolean>;
 
-  /**
-   * Returns true if the application is running on a desktop device
-   */
-  abstract isDesktop(): boolean;
+ /**
+  * Returns true if the application is running on a desktop device
+  */
+  abstract readonly isDesktop: Signal<boolean>;
 
   /**
    * Returns true if the application is running as a TWA
    */
-  abstract isTWA(): boolean;
+  abstract readonly isTWA: Signal<boolean>;
 }
 
 export const CONTEXT_VALUE = new InjectionToken<string>('CONTEXT_VALUE', {
