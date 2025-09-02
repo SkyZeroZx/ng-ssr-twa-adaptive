@@ -55,6 +55,8 @@ export class ProductService {
       .pipe(map(toProductCard));
   }
 
+  
+  @Cacheable()
   getCategoryList(): Observable<string[]> {
     return this.http.get<string[]>(`${environment.API}/products/category-list`);
   }
