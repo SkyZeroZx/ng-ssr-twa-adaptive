@@ -20,8 +20,8 @@
     "path": "android.keystore",
     "alias": "android"
   },
-  "appVersionName": "3",
-  "appVersionCode": 3,
+  "appVersionName": "5",
+  "appVersionCode": 6,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://ng-ssr-twa-adaptive.vercel.app/manifest.webmanifest",
@@ -36,11 +36,15 @@
   "fullScopeUrl": "https://ng-ssr-twa-adaptive.vercel.app/",
   "minSdkVersion": 21,
   "orientation": "default",
-  "fingerprints": [],
+  "fingerprints": [
+    {
+      "value": "FB:AF:E5:0F:CE:D3:D2:B3:A8:63:6C:16:AE:8A:60:4C:67:0E:68:93:B5:D0:E3:B2:BC:82:DC:83:B2:0F:97:8C"
+    }
+  ],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
   "protocolHandlers": [],
   "fileHandlers": [],
   "launchHandlerClientMode": "",
-  "appVersion": "3"
+  "appVersion": "5"
 }

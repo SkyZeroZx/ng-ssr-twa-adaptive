@@ -57,8 +57,8 @@ android {
         applicationId "app.vercel.ng_ssr_twa_adaptive.twa"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 3
-        versionName "3"
+        versionCode 6
+        versionName "5"
 
         // The name for the application
         resValue "string", "appName", twaManifest.name
