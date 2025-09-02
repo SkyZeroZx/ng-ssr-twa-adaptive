@@ -1,9 +1,16 @@
 {
   "name": "ng-twa",
+  "description": "Awesome Angular TWA Store",
   "short_name": "ng-twa",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
+  "handle_links": "preferred",
+  "orientation": "portrait",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
   "icons": [
     {
       "src": "icons/icon-72x72.png",
@@ -52,6 +59,32 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Lista de Deseos",
+      "short_name": "Deseos",
+      "url": "/wish-list",
+      "description": "Puede ver los deseos marcados",
+      "icons": [
+        {
+          "src": "/twa/shortcuts/list-wish/heart.png",
+          "sizes": "100x100"
+        }
+      ]
+    },
+    {
+      "name": "Carrito",
+      "short_name": "Carrito",
+      "url": "/shop-cart",
+      "description": "Puede visualizar su carrito de compras",
+      "icons": [
+        {
+          "src": "/twa/shortcuts/documents/order.png",
+          "sizes": "100x100"
+        }
+      ]
     }
   ]
 }
