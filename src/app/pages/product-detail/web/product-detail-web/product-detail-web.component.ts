@@ -6,16 +6,13 @@ import {
   input,
   signal,
 } from '@angular/core';
-import {
-   DecimalPipe,
-  Location,
-  TitleCasePipe,
-} from '@angular/common';
+import { DecimalPipe, Location, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductCard } from '@/core/interfaces';
 import { TuiButton, TuiIcon, TuiAlertService } from '@taiga-ui/core';
 import { TuiRating, TuiBadge } from '@taiga-ui/kit';
 import { ShopCartService } from '@/services/shop-cart';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail-web',
@@ -27,6 +24,7 @@ import { ShopCartService } from '@/services/shop-cart';
     TuiIcon,
     TuiRating,
     TuiBadge,
+    RouterLink,
   ],
   templateUrl: './product-detail-web.component.html',
   styleUrl: './product-detail-web.component.css',
@@ -37,7 +35,9 @@ export default class ProductDetailWebComponent {
   private readonly alertService = inject(TuiAlertService);
   private readonly location = inject(Location);
 
-  product = input.required<ProductCard>();
+  readonly product = input.required<ProductCard>();
+
+  readonly category = computed(() => this.product().category);
 
   // State management
   quantity = signal(1);
@@ -137,8 +137,6 @@ export default class ProductDetailWebComponent {
     if (!this.isInStock()) return;
 
     this.addToCart();
-    // Navigate to checkout (implement as needed)
-    console.log('Navigating to checkout...');
   }
 
   addToWishlist(): void {

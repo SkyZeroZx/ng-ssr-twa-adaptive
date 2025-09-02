@@ -21,12 +21,16 @@
           Back
         </button>
         <span class="mx-2">›</span>
-        <span class="text-blue-600 hover:text-blue-800 cursor-pointer"
+        <span
+          class="text-blue-600 hover:text-blue-800 cursor-pointer"
+          routerLink="/"
           >Home</span
         >
         <span class="mx-2">›</span>
-        <span class="text-blue-600 hover:text-blue-800 cursor-pointer"
-          >Electronics</span
+        <span
+          class="text-blue-600 hover:text-blue-800 cursor-pointer"
+          [routerLink]="['/', category()]"
+          >{{ category() | titlecase }}</span
         >
         <span class="mx-2">›</span>
         <span class="font-medium text-gray-900 truncate">{{
