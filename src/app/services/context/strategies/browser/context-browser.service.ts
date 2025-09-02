@@ -1,7 +1,6 @@
-import { DOCUMENT, inject, Injectable } from '@angular/core';
+import { DOCUMENT, inject, Injectable, signal } from '@angular/core';
 
 import { ContextService } from '../../token/context.token';
-import { isAndroidAppReferer } from '../../utils/utils';
 import { ContextBaseService } from '../base/context-base.service';
 
 @Injectable({
@@ -12,25 +11,19 @@ export class ContextBrowserService
   implements ContextService
 {
   private readonly document = inject(DOCUMENT);
+  override userAgent = signal(this.document.defaultView?.navigator.userAgent!);
+  override cookies = signal(this.document.cookie);
+  override url = signal(this.document.URL);
+  override referer = signal(this.document.referrer);
 
   constructor() {
     super();
-
     this.setupContext();
   }
 
   setupContext() {
-    this.userAgent.set(this.document.defaultView?.navigator.userAgent!);
-
-    const context = this.getContextValue(
-      this.document.cookie,
-      this.document.URL
-    );
-
-    const isValidContext = context === this.contextValue;
-
-    if (isValidContext && isAndroidAppReferer(this.document.referrer)) {
-      this.ctx.set(context);
+    if (this.isAllowedContext()) {
+      this.ctx.set(this.contextValue);
       this.removeQueryContext();
     }
   }

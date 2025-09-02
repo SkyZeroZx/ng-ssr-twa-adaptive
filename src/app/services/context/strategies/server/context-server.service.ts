@@ -1,7 +1,12 @@
-import { inject, Injectable, REQUEST, RESPONSE_INIT } from '@angular/core';
+import {
+  inject,
+  Injectable,
+  REQUEST,
+  RESPONSE_INIT,
+  signal,
+} from '@angular/core';
 
 import { ContextService } from '../../token/context.token';
-import { isAndroidAppReferer } from '../../utils/utils';
 import { ContextBaseService } from '../base/context-base.service';
 
 @Injectable({
@@ -12,7 +17,16 @@ export class ContextServerService
   implements ContextService
 {
   private readonly request = inject(REQUEST);
+
   private readonly responseInit = inject(RESPONSE_INIT, { optional: true });
+
+  override userAgent = signal(this.request?.headers.get('user-agent')!);
+
+  override cookies = signal(this.request?.headers.get('cookie')!);
+
+  override url = signal(this.request?.url!);
+
+  override referer = signal(this.request?.headers.get('referer')!);
 
   constructor() {
     super();
@@ -20,20 +34,9 @@ export class ContextServerService
   }
 
   setupContext(): void {
-    this.userAgent.set(this.request?.headers.get('user-agent')!);
-
-    const context = this.getContextValue(
-      this.request?.headers.get('cookie')!,
-      this.request!.url
-    );
-
-    const referer = this.request!.headers.get('referer')!;
-
-    const isValidContext = this.contextValue === context;
-
-    if (isAndroidAppReferer(referer) && isValidContext) {
+    if (this.isAllowedContext()) {
       // Similar implementation it's possible using a TransferState
-      this.ctx.set(context);
+      this.ctx.set(this.contextValue);
 
       const headers = new Headers(this.responseInit!.headers);
 
