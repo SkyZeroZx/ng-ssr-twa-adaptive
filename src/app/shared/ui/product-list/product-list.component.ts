@@ -45,4 +45,9 @@ export class ProductListComponent {
   changeQuantity(productCart: ShopCart) {
     this.shopCartService.updateQuantity(productCart);
   }
+
+
+  closeDialog() {
+    this.context?.completeWith?.();
+  }
 }

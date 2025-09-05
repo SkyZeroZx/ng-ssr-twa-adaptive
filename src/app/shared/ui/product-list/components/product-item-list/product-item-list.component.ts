@@ -13,7 +13,7 @@ import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-product-item-list',
-  imports: [TuiSwipeActions, TitleCasePipe, RouterLink, TuiIcon , CurrencyPipe],
+  imports: [TuiSwipeActions, TitleCasePipe, RouterLink, TuiIcon, CurrencyPipe],
   templateUrl: './product-item-list.component.html',
   styleUrl: './product-item-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,10 +21,15 @@ import { TuiIcon } from '@taiga-ui/core';
 export class ProductItemListComponent {
   readonly productCart = input.required<ShopCart>();
 
- 
+  readonly clickedView = output<void>();
+
   readonly removeItem = output<ShopCart>();
 
   clickedRemove() {
     this.removeItem.emit(this.productCart());
+  }
+
+  onClickedView() {
+    this.clickedView.emit();
   }
 }

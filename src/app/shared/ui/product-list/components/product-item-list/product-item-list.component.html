@@ -29,6 +29,7 @@
     <a
       class="product-actions__container"
       [routerLink]="['/product', productCart().id]"
+      (click)="onClickedView()"
     >
       <tui-icon
         class="product-actions__container__icon"
