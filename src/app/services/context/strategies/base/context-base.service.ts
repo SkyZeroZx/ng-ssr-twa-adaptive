@@ -27,7 +27,7 @@ export class ContextBaseService {
 
   protected readonly referer = signal('');
 
-  readonly isValidContext = computed(() => this.ctx() === this.contextValue);
+  private readonly isValidContext = computed(() => this.ctx() === this.contextValue);
 
   readonly isAllowedContext = computed(
     () =>
