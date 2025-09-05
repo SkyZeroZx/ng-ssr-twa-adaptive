@@ -399,8 +399,8 @@ bubblewrap build --release
 Si modificas el parámetro de contexto en el `ContextService`, actualiza correspondientemente la URL de inicio:
 
 ```typescript
-// Si cambias en el service de: 'ctx=twa' a 'context=android'
-// Actualiza la Start URL a: /?context=android
+// Si cambias en el service de: 'ctx=twa' a 'ctx=android'
+// Actualiza la Start URL a: /?ctx=android
 ```
 
 ### Deployment y Testing
@@ -424,7 +424,7 @@ Verifica que la detección funcione correctamente:
 
 ### Recursos Adicionales
 
-- * [Google Codelabs - PWA to Play Store](https://developers.google.com/codelabs/pwa-in-play)**
+- **[Google Codelabs - PWA to Play Store](https://developers.google.com/codelabs/pwa-in-play)**
 - **[Bubblewrap Documentation](https://github.com/GoogleChromeLabs/bubblewrap)**
 - **[Digital Asset Links](https://developers.google.com/digital-asset-links)**
 - **[TWA Best Practices](https://web.dev/trusted-web-activity/)**
