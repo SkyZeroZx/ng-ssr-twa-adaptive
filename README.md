@@ -257,7 +257,7 @@ El sistema detecta automáticamente el contexto de ejecución mediante múltiple
 #### **📱 Client-Side Enhancement**
 
 - **Document.referrer**: Validación client-side
-- **Window.matchMedia**: Detección de capabilities
+- **navigator.userAgent**: Detección de user agent
 - **Navigator API**: Hardware-specific optimizations
 
 ### Digital Asset Links & Security
