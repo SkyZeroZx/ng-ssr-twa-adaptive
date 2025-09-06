@@ -1,6 +1,30 @@
 <!-- Desktop Product Detail Layout -->
 <div class="min-h-screen bg-gray-50">
   <!-- Breadcrumb Navigation -->
+
+  @if (isMobile()) {
+  <div class="go-back-mobile">
+    <button
+      (click)="goBack()"
+      class="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-800 shadow-sm transition-all"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span class="font-medium">Back</span>
+    </button>
+  </div>
+  } @else {
   <div class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 py-3">
       <nav class="flex items-center space-x-2 text-sm text-gray-600">
@@ -39,9 +63,10 @@
       </nav>
     </div>
   </div>
+  }
 
   <!-- Main Product Content -->
-  <div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="max-w-7xl mx-auto sm:px-4 px-0 sm:py-8 py-0">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Left Column - Product Images -->
       <div class="space-y-4">
@@ -80,7 +105,7 @@
         </div>
 
         <!-- Thumbnail Images -->
-        <div class="flex space-x-2">
+        <div class="flex space-x-2 px-4">
           @for (image of productImages(); track $index) {
           <button
             (click)="selectImage($index)"
@@ -99,7 +124,7 @@
       </div>
 
       <!-- Right Column - Product Information -->
-      <div class="space-y-6">
+      <div class="space-y-6 px-4">
         <!-- Product Title & Rating -->
         <div>
           <h1 class="text-3xl font-bold text-gray-900 mb-3">
@@ -167,15 +192,15 @@
         <div class="border-b border-gray-200 pb-6">
           <div class="flex items-end space-x-4">
             <span class="text-4xl font-bold text-gray-900">{{
-              formattedPrice()
+              product().price | currency
             }}</span>
-            <span class="text-lg text-gray-500 line-through"
-              >€{{ product().price * 1.25 | number : "1.2-2" }}</span
-            >
+            <span class="text-lg text-gray-500 line-through">{{
+              product().price * 1.25 | number : "1.2-2"
+            }}</span>
             <tui-badge appearance="accent" class="text-sm">20% OFF</tui-badge>
           </div>
           <p class="text-sm text-gray-600 mt-2">
-            Free shipping on orders over €50
+            Free shipping on orders over $50
           </p>
         </div>
 
@@ -291,7 +316,7 @@
             <div class="flex justify-between items-center">
               <span class="text-lg font-medium text-gray-900">Total:</span>
               <span class="text-2xl font-bold text-gray-900">
-                €{{ totalPrice() | number : "1.2-2" }}
+                {{ totalPrice() | currency }}
               </span>
             </div>
           </div>
@@ -351,7 +376,7 @@
     </div>
 
     <!-- Product Details Tabs -->
-    <div class="mt-16">
+    <div class="mt-16 px-4">
       <div class="border-b border-gray-200">
         <nav class="flex space-x-8">
           <button

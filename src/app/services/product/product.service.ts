@@ -34,6 +34,11 @@ export class ProductService {
 
     params = params.append('q', paginationOptions.search ?? '');
 
+    if (paginationOptions.order) {
+      params = params.append('sortBy', 'price');
+      params = params.append('order', paginationOptions.order);
+    }
+
     if (paginationOptions.category) {
       contextURL = `/products/category/${paginationOptions.category}`;
     }
@@ -55,7 +60,6 @@ export class ProductService {
       .pipe(map(toProductCard));
   }
 
-  
   @Cacheable()
   getCategoryList(): Observable<string[]> {
     return this.http.get<string[]>(`${environment.API}/products/category-list`);

@@ -31,7 +31,7 @@ export abstract class ShopBaseComponent {
     map((params) => params['category'] as string)
   );
 
-  private readonly category = toSignal(this.category$);
+  protected readonly category = toSignal(this.category$);
 
   readonly pagination = linkedSignal(() => {
     return {
@@ -93,6 +93,7 @@ export abstract class ShopBaseComponent {
       skip: pagination.skip + pagination.limit,
       search: pagination.search,
       category: pagination.category,
+      order: pagination.order,
     }));
   }
 

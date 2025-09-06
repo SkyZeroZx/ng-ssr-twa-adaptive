@@ -3,6 +3,7 @@ export interface PaginationOptions {
   skip: number;
   search: string;
   category?: string;
+  order: string;
 }
 
 export interface PaginationMetaData {

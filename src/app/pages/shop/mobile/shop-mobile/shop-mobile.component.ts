@@ -1,22 +1,23 @@
 import { NgxSkeletonLoaderComponent } from 'ngx-skeleton-loader';
-import { debounceTime, filter, map, startWith, switchMap } from 'rxjs';
 
 import { ScrollEndDirective } from '@/shared/directives/scroll-end';
 import { ProductWebComponent } from '@/shared/ui/product/web/product-web.component';
+import { TitleCasePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  signal,
   computed,
+  inject,
+  signal,
 } from '@angular/core';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TuiButton, TuiIcon, TuiLoader } from '@taiga-ui/core';
+import { TuiChip } from '@taiga-ui/kit';
 
 import { ShopBaseComponent } from '../../base/shop-base.component';
-import { TuiChip } from '@taiga-ui/kit';
-import { TitleCasePipe } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ProductCard } from '../../../../core/interfaces';
 
 @Component({
   selector: 'app-shop-mobile',
@@ -39,6 +40,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ShopMobileComponent extends ShopBaseComponent {
+  private readonly router = inject(Router);
   readonly viewMode = signal<'grid' | 'list'>('grid');
 
   // Categories for filter
@@ -55,23 +57,17 @@ export default class ShopMobileComponent extends ShopBaseComponent {
     this.viewMode.update((mode) => (mode === 'grid' ? 'list' : 'grid'));
   }
 
-  onProductAddToCart(product: any) {
+  onProductAddToCart(product: ProductCard) {
     console.log('Add to cart:', product);
     // Implement cart logic
   }
 
-  onProductAddToWishlist(product: any) {
+  onProductAddToWishlist(product: ProductCard) {
     console.log('Add to wishlist:', product);
     // Implement wishlist logic
   }
 
-  onProductView(product: any) {
-    console.log('View product:', product);
-    // Navigate to product detail
-  }
-
-  onProductShare(product: any) {
-    console.log('Share product:', product);
-    // Implement share functionality
+  onProductView(product: ProductCard) {
+    this.router.navigate(['/product', product.id]);
   }
 }

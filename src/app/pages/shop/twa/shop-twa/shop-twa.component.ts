@@ -50,6 +50,7 @@ export default class ShopTwaComponent extends ShopBaseComponent {
           search,
           limit: 10,
           skip: 0,
+          order: 'asc',
         })
         .pipe(
           map(({ data }) => ({

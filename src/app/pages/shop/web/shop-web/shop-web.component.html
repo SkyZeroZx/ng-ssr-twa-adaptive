@@ -39,36 +39,14 @@
                   >Sort by:</label
                 >
                 <select
+                  [formControl]="sortControl"
                   class="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
-                  <option>Featured</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Customer Reviews</option>
-                  <option>Newest Arrivals</option>
+                  <option value="asc">Price: Low to High</option>
+                  <option value="desc">Price: High to Low</option>
                 </select>
               </div>
-
-              <div
-                class="flex border border-gray-300 rounded-md overflow-hidden"
-              >
-                <button
-                  class="px-3 py-1.5 text-sm bg-blue-50 text-blue-600 border-r border-gray-300"
-                >
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" />
-                  </svg>
-                </button>
-                <button
-                  class="px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50"
-                >
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path
-                      d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z"
-                    />
-                  </svg>
-                </button>
-              </div>
+ 
             </div>
           </div>
         </div>
@@ -77,42 +55,29 @@
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
         >
           @if (firstLoad()) {
-            <ng-container *ngTemplateOutlet="skeleton"></ng-container>
-          } @else {
-            
-            @for (item of products(); track $index) {
-              <app-product-web
-                [style.view-transition-name]="`product-image-${item.id}`"
-                [product]="item"
-                layout="grid"
-                [routerLink]="['/product', item.id]"
-              />
-            }
-
-        }
-
-
-        @if(listProducts.isLoading()) {
-            <ng-container  *ngTemplateOutlet="skeleton"  />
-        }
- 
-         
-  
-
-
+          <ng-container *ngTemplateOutlet="skeleton"></ng-container>
+          } @else { @for (item of products(); track $index) {
+          <app-product-web
+            [style.view-transition-name]="`product-image-${item.id}`"
+            [product]="item"
+            layout="grid"
+            [routerLink]="['/product', item.id]"
+          />
+          } } @if(listProducts.isLoading()) {
+          <ng-container *ngTemplateOutlet="skeleton" />
+          }
         </div>
-          @if(endOfList()) {
-            <div class="p-4">
-              <p class="text-2xl font-bold text-center text-gray-700">End of list products</p>
-            </div>
-          }
-
-          @if(!endOfList() && !listProducts.isLoading()) {
-              <div class="pt-4 pb-4">
-               <button tuiButton (click)="loadMore()">Load More</button>
-               </div>
-          }
-
+        @if(endOfList()) {
+        <div class="p-4">
+          <p class="text-2xl font-bold text-center text-gray-700">
+            End of list products
+          </p>
+        </div>
+        } @if(!endOfList() && !listProducts.isLoading()) {
+        <div class="pt-4 pb-4">
+          <button tuiButton (click)="loadMore()">Load More</button>
+        </div>
+        }
       </section>
     </section>
   </section>

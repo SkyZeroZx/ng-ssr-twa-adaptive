@@ -12,11 +12,10 @@
             class="!p-1.5"
             type="button"
           >
-            @if (viewMode() === 'grid') {
-            <tui-icon icon="@tui.grid" class="w-4 h-4" />
-            } @else {
-            <tui-icon icon="@tui.list" class="w-4 h-4" />
-            }
+            <tui-icon
+              [icon]="viewMode() === 'grid' ? '@tui.grid' : '@tui.list'"
+              class="w-4 h-4"
+            />
           </button>
         </div>
       </div>
@@ -79,7 +78,6 @@
         (addToCart)="onProductAddToCart($event)"
         (addToWishlist)="onProductAddToWishlist($event)"
         (viewProduct)="onProductView($event)"
-        (shareProduct)="onProductShare($event)"
         class="block h-full"
       />
       }

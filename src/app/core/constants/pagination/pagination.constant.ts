@@ -5,4 +5,5 @@ export const PAGINATION_DEFAULT: PaginationOptions = {
   skip: 0,
   search: '',
   category: '',
+  order: 'asc',
 };

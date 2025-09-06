@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   model,
-  output,
   ViewEncapsulation,
 } from '@angular/core';
 import { HeartWishDirective } from './directive/button-wish-list.directive';
@@ -18,11 +17,7 @@ import { HeartWishDirective } from './directive/button-wish-list.directive';
 export class ButtonWishListComponent {
   readonly isWish = model(false);
 
-  readonly wClick = output<boolean>();
-
   wishClick() {
     this.isWish.set(!this.isWish());
-
-    this.wClick.emit(this.isWish());
   }
 }

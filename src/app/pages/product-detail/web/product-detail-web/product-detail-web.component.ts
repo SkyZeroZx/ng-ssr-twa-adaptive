@@ -6,14 +6,25 @@ import {
   input,
   signal,
 } from '@angular/core';
-import { DecimalPipe, Location, TitleCasePipe } from '@angular/common';
+import {
+  CurrencyPipe,
+  DecimalPipe,
+  Location,
+  TitleCasePipe,
+} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductCard } from '@/core/interfaces';
 import { TuiButton, TuiIcon, TuiAlertService } from '@taiga-ui/core';
 import { TuiRating, TuiBadge } from '@taiga-ui/kit';
 import { ShopCartService } from '@/services/shop-cart';
 import { RouterLink } from '@angular/router';
-
+import { filter, map, shareReplay } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  LayoutModule,
+} from '@angular/cdk/layout';
 @Component({
   selector: 'app-product-detail-web',
   imports: [
@@ -25,14 +36,27 @@ import { RouterLink } from '@angular/router';
     TuiRating,
     TuiBadge,
     RouterLink,
+    CurrencyPipe,
+    LayoutModule,
   ],
   templateUrl: './product-detail-web.component.html',
   styleUrl: './product-detail-web.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ProductDetailWebComponent {
+  private readonly breakpointService = inject(BreakpointObserver);
+
+  readonly isMobile = toSignal(
+    this.breakpointService.observe(Breakpoints.Handset).pipe(
+      map((result) => result.matches),
+      shareReplay()
+    )
+  );
+
   private readonly shopCartService = inject(ShopCartService);
+
   private readonly alertService = inject(TuiAlertService);
+
   private readonly location = inject(Location);
 
   readonly product = input.required<ProductCard>();
@@ -46,14 +70,6 @@ export default class ProductDetailWebComponent {
   activeTab = signal<'description' | 'specifications' | 'reviews'>(
     'description'
   );
-
-  // Computed properties
-  formattedPrice = computed(() => {
-    return new Intl.NumberFormat('es-ES', {
-      style: 'currency',
-      currency: 'EUR',
-    }).format(this.product().price);
-  });
 
   isInStock = computed(() => this.product().stock > 0);
 
@@ -83,7 +99,6 @@ export default class ProductDetailWebComponent {
     this.product().image,
   ]);
 
-  // Methods
   goBack(): void {
     this.location.back();
   }

@@ -105,6 +105,16 @@ const MOBILE_ROUTES: Routes = [
         loadComponent: () =>
           import('@/pages/shop/mobile/shop-mobile/shop-mobile.component'),
       },
+      {
+        path: 'product/:id',
+        resolve: {
+          product: productResolver,
+        },
+        loadComponent: () =>
+          import(
+            '@/pages/product-detail/web/product-detail-web/product-detail-web.component'
+          ),
+      },
     ],
   },
 ];
